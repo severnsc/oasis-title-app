@@ -1,5 +1,5 @@
 class TitleOrder < ApplicationRecord
-	attr_accessor :primary_residence
+	attr_accessor :primary_residence, :number_of_buyers
 	belongs_to :property, class_name: "Address"
 	belongs_to :buyers_agent, class_name: "Agent"
 	belongs_to :sellers_agent, class_name: "Agent"
@@ -18,4 +18,15 @@ class TitleOrder < ApplicationRecord
 	accepts_nested_attributes_for :sellers_agent
 	accepts_nested_attributes_for :lender
 	accepts_nested_attributes_for :buyers
+
+	def check_if_params_exist
+		buyers_agent = Agent.find_by_email(self.buyers_agent.email)
+		self.buyers_agent = buyers_agent if buyers_agent
+		sellers_agent = Agent.find_by_email(self.sellers_agent.email)
+		self.sellers_agent = sellers_agent if sellers_agent
+		lender = Lender.find_by_email(self.lender.email)
+		self.lender = lender if lender
+		property = Address.where(['street = ? and city = ? and state = ? and zip = ?', self.property.street, self.property.city, self.property.state, self.property.zip])
+		self.property = property unless property.empty?
+	end
 end
