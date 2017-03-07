@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307174925) do
+ActiveRecord::Schema.define(version: 20170307180009) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -51,6 +51,31 @@ ActiveRecord::Schema.define(version: 20170307174925) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["address_id"], name: "index_buyers_on_address_id"
+  end
+
+  create_table "buyers_title_orders", id: false, force: :cascade do |t|
+    t.integer "buyer_id"
+    t.integer "title_order_id"
+    t.index ["buyer_id"], name: "index_buyers_title_orders_on_buyer_id"
+    t.index ["title_order_id"], name: "index_buyers_title_orders_on_title_order_id"
+  end
+
+  create_table "title_orders", force: :cascade do |t|
+    t.integer  "property_id"
+    t.integer  "buyers_agent_id"
+    t.integer  "sellers_agent_id"
+    t.integer  "lender_id"
+    t.string   "title_type"
+    t.string   "closing_type"
+    t.string   "buyers_agent_commission"
+    t.string   "sellers_agent_commission"
+    t.boolean  "survey_requested",         default: true
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["buyers_agent_id"], name: "index_title_orders_on_buyers_agent_id"
+    t.index ["lender_id"], name: "index_title_orders_on_lender_id"
+    t.index ["property_id"], name: "index_title_orders_on_property_id"
+    t.index ["sellers_agent_id"], name: "index_title_orders_on_sellers_agent_id"
   end
 
 end
