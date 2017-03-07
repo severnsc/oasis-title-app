@@ -10,7 +10,7 @@ class TitleOrderTest < ActiveSupport::TestCase
   end
 
   test "should be valid" do
-  	assert @title_order.valid?, "#{@title_order.errors.full_messages}"
+  	assert @title_order.valid?
   end
 
   test "should have a property" do
