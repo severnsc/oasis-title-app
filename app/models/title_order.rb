@@ -13,4 +13,9 @@ class TitleOrder < ApplicationRecord
 	validates :buyers_agent_commission, presence: true
 	validates :sellers_agent_commission, presence: true
 	validates :survey_requested, presence: true
+	accepts_nested_attributes_for :property
+	accepts_nested_attributes_for :buyers_agent
+	accepts_nested_attributes_for :sellers_agent
+	accepts_nested_attributes_for :lender
+	accepts_nested_attributes_for :buyers
 end

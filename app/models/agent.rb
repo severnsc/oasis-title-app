@@ -6,4 +6,5 @@ class Agent < ApplicationRecord
 	validates :email, presence: true
 	validates :license_number, presence: true
 	validates :brokerage, presence: true
+	accepts_nested_attributes_for :brokerage
 end
