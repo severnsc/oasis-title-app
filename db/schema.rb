@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308181626) do
+ActiveRecord::Schema.define(version: 20170308201751) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -48,10 +48,12 @@ ActiveRecord::Schema.define(version: 20170308181626) do
     t.string   "phone_number"
     t.string   "email"
     t.integer  "address_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "spouse_id"
+    t.integer  "mailing_address_id"
     t.index ["address_id"], name: "index_buyers_on_address_id"
+    t.index ["mailing_address_id"], name: "index_buyers_on_mailing_address_id"
     t.index ["spouse_id"], name: "index_buyers_on_spouse_id"
   end
 

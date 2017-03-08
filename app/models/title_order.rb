@@ -27,6 +27,10 @@ class TitleOrder < ApplicationRecord
 				self.buyers << @buyer
 			end
 		end
+		self.buyers.each do |buyer|
+			mailing_address = Address.where(['street = ? and city = ? and state = ? and zip = ?', buyer.mailing_address.street, buyer.mailing_address.city, buyer.mailing_address.state, buyer.mailing_address.zip])
+			buyer.mailing_address = mailing_address.first unless mailing_address.empty?
+		end
 		buyers_agent = Agent.find_by_email(self.buyers_agent.email)
 		self.buyers_agent = buyers_agent if buyers_agent
 		sellers_agent = Agent.find_by_email(self.sellers_agent.email)

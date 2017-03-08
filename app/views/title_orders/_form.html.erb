@@ -4,6 +4,24 @@
 
 	<%= f.hidden_field :number_of_buyers, value: session[:number_of_buyers] %>
 
+	<%= field_set_tag "Property" do %>
+	<%= f.fields_for :property, @title_order.property do |property| %>
+
+		<%= property.label :street %>
+		<%= property.text_field :street, class: "form-control" %>
+
+		<%= property.label :city %>
+		<%= property.text_field :city, class: "form-control" %>
+
+		<%= property.label :state %>
+		<%= property.text_field :state, class: "form-control" %>
+
+		<%= property.label :zip %>
+		<%= property.text_field :zip, class: "form-control" %>
+
+	<% end %>
+	<% end %>
+
 	<%= field_set_tag "Buyers" do %>
 
 	<% if @title_order.buyers.first %>
@@ -24,11 +42,30 @@
 			<%= buyer.label :email %>
 			<%= buyer.email_field :email, class: "form-control" %>
 
+			<%= label_tag 'mailing_address', "Mailing address is the same as property address" %>
+			<%= check_box_tag 'mailing_address', 'same', false %>
+
+			<%= buyer.fields_for :mailing_address, @title_order.buyers.first.build_mailing_address do |mail| %>
+
+				<%= mail.label :street %>
+				<%= mail.text_field :street, class: 'form-control' %>
+
+				<%= mail.label :city %>
+				<%= mail.text_field :city, class: 'form-control' %>
+
+				<%= mail.label :state %>
+				<%= mail.text_field :state, class: 'form-control' %>
+
+				<%= mail.label :zip %>
+				<%= mail.text_field :zip, class: 'form-control' %>
+
+			<% end %>
+
 		<% end %>
 
 	<% else %>
 
-		<%= f.fields_for :buyers, [Buyer.new]*session[:number_of_buyers] do |buyer| %>
+		<%= f.fields_for :buyers, session[:number_of_buyers].times {@title_order.buyers.build} do |buyer| %>
 
 			<h2>Buyer</h2>
 			
@@ -43,6 +80,25 @@
 
 			<%= buyer.label :email %>
 			<%= buyer.email_field :email, class: "form-control" %>
+
+			<%= label_tag 'mailing_address', "Mailing address is the same as property address" %>
+			<%= check_box_tag 'mailing_address', 'same', false %>
+
+			<%= buyer.fields_for :mailing_address, @title_order.buyers.first.build_mailing_address do |mail| %>
+
+				<%= mail.label :street %>
+				<%= mail.text_field :street, class: 'form-control' %>
+
+				<%= mail.label :city %>
+				<%= mail.text_field :city, class: 'form-control' %>
+
+				<%= mail.label :state %>
+				<%= mail.text_field :state, class: 'form-control' %>
+
+				<%= mail.label :zip %>
+				<%= mail.text_field :zip, class: 'form-control' %>
+
+			<% end %>
 
 		<% end %>
 
@@ -65,24 +121,6 @@
 
 	<%= f.label :closing_type, "Will buyer/seller be present for the closing?" %>
 	<%= f.select(:closing_type, [["Yes", "In Office"], ["No", "Mobile"]], {}, {class: "form-control"}) %>
-
-	<%= field_set_tag "Property" do %>
-	<%= f.fields_for :property, @title_order.property do |property| %>
-
-		<%= property.label :street %>
-		<%= property.text_field :street, class: "form-control" %>
-
-		<%= property.label :city %>
-		<%= property.text_field :city, class: "form-control" %>
-
-		<%= property.label :state %>
-		<%= property.text_field :state, class: "form-control" %>
-
-		<%= property.label :zip %>
-		<%= property.text_field :zip, class: "form-control" %>
-
-	<% end %>
-	<% end %>
 
 	<%= field_set_tag "Agents" do %>
 
