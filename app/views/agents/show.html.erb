@@ -1,2 +1,11 @@
-<h1>Agents#show</h1>
-<p>Find me in app/views/agents/show.html.erb</p>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="agent-show">
+			<h2><%= @agent.full_name %></h2>
+			<p>Phone: <%= @agent.phone_number %></p>
+			<p>Email: <%= @agent.email %></p>
+			<p>License Number: <%= @agent.license_number %></p>
+			<p>Brokerage: <%= link_to @agent.brokerage.name, brokerage_path(@agent.brokerage) %></p>
+		</div>
+	</div>
+</div>
