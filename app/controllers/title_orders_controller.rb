@@ -35,20 +35,38 @@ class TitleOrdersController < ApplicationController
 	end
 
 	def edit
+		@title_order = TitleOrder.find(params[:id])
+		session[:number_of_buyers] = @title_order.buyers.count
 	end
 
 	def update
+		@title_order = TitleOrder.find(params[:id])
+		@title_order.buyers.each do |buyer|
+			buyer.address = @title_order.property if params[:primary_residence] = '1'
+		end
+		#byebug
+		if @title_order.update_attributes(title_order_params)
+			flash[:success] = "Title order updated!"
+			redirect_to title_order_path(@title_order)
+			session.delete(:number_of_buyers)
+		else
+			render 'edit'
+		end
 	end
 
 	def index
+		@title_orders = TitleOrder.all
 	end
 
-	def delete
+	def destroy
+		@title_order = TitleOrder.find(params[:id])
+		@title_order.delete
+		redirect_to new_title_order_path
 	end
 
 	private
 
 	def title_order_params
-		params.require(:title_order).permit(:number_of_buyers, :title_type, :closing_type, :sellers_agent_commission, :buyers_agent_commission, :survey_requested, buyers_attributes: [:first_name, :last_name, :phone_number, :email], property_attributes: [:street, :city, :state, :zip], lender_attributes: [:name, :phone_number, :email], buyers_agent_attributes: [:first_name, :last_name, :license_number, :phone_number, :email, brokerage_attributes: [:name, :license_number, address_attributes: [:street, :city, :state, :zip]]], sellers_agent_attributes: [:first_name, :last_name, :license_number, :phone_number, :email, brokerage_attributes: [:name, :license_number, address_attributes:[:street, :city, :state, :zip]]])
+		params.require(:title_order).permit(:number_of_buyers, :title_type, :closing_type, :sellers_agent_commission, :buyers_agent_commission, :survey_requested, buyers_attributes: [:id, :first_name, :last_name, :phone_number, :email], property_attributes: [:id, :street, :city, :state, :zip], lender_attributes: [:id, :name, :phone_number, :email], buyers_agent_attributes: [:id, :first_name, :last_name, :license_number, :phone_number, :email, brokerage_attributes: [:id, :name, :license_number, address_attributes: [:id, :street, :city, :state, :zip]]], sellers_agent_attributes: [:id, :first_name, :last_name, :license_number, :phone_number, :email, brokerage_attributes: [:id, :name, :license_number, address_attributes:[:id, :street, :city, :state, :zip]]])
 	end
 end

@@ -50,6 +50,8 @@
 				<li>Will buyers be present for the closing?: <%= @title_order.closing_type %></li>
 				<li>Was a survey requested?: <%= @title_order.survey_requested %></li>
 			</ul>
+			<%= link_to "Edit", edit_title_order_path(@title_order) %>
+			<%= link_to "Delete", title_order_path(@title_order), method: :delete, data: {confirm: "Arey you sure?"} %>
 		</div>
 	</div>
 </div>

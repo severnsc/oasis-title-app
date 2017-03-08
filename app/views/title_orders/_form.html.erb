@@ -1,0 +1,228 @@
+<%= form_for @title_order do |f| %>
+
+	<%= render 'shared/error_messages', object: f.object %>
+
+	<%= f.hidden_field :number_of_buyers, value: session[:number_of_buyers] %>
+
+	<%= field_set_tag "Buyers" do %>
+
+	<% if @title_order.buyers.first %>
+
+		<%= f.fields_for :buyers, @title_order.buyers[0...session[:number_of_buyers]] do |buyer| %>
+
+			<h2>Buyer</h2>
+			
+			<%= buyer.label :first_name %>
+			<%= buyer.text_field :first_name, class: "form-control" %>
+
+			<%= buyer.label :last_name %>
+			<%= buyer.text_field :last_name, class: "form-control" %>
+
+			<%= buyer.label :phone_number %>
+			<%= buyer.telephone_field :phone_number, class: "form-control" %>
+
+			<%= buyer.label :email %>
+			<%= buyer.email_field :email, class: "form-control" %>
+
+		<% end %>
+
+	<% else %>
+
+		<%= f.fields_for :buyers, [Buyer.new]*session[:number_of_buyers] do |buyer| %>
+
+			<h2>Buyer</h2>
+			
+			<%= buyer.label :first_name %>
+			<%= buyer.text_field :first_name, class: "form-control" %>
+
+			<%= buyer.label :last_name %>
+			<%= buyer.text_field :last_name, class: "form-control" %>
+
+			<%= buyer.label :phone_number %>
+			<%= buyer.telephone_field :phone_number, class: "form-control" %>
+
+			<%= buyer.label :email %>
+			<%= buyer.email_field :email, class: "form-control" %>
+
+		<% end %>
+
+	<% end %>
+
+	<% if session[:number_of_buyers] == 2 %>
+
+	<%= f.label :married, "Are the buyers married?" %>
+	<%= f.check_box :married, class: 'form-control' %>
+
+	<% end %>
+
+	<% end %>
+
+	<%= f.label :primary_residence, "Is this property going to be the buyer's primary residence?" %>
+	<%= f.check_box :primary_residence, class: "form-control" %>
+
+	<%= f.label :title_type, "How are the buyers taking the title?" %>
+	<%= f.select(:title_type, [["Husband & Wife", "Husband & Wife"], ["Joint tenants with Right of survivorship", "Joint tenants with Right of survivorship"], ["Tenants in Common", "Tenants in Common"], ["In Entity Name", "In Entity Name"], ["As a married man", "As a married man"], ["As a married woman", "As a married woman"], ["As a single man", "As a single man"], ["As a single woman", "As a single woman"]], {}, {class: "form-control"}) %>
+
+	<%= f.label :closing_type, "Will buyer/seller be present for the closing?" %>
+	<%= f.select(:closing_type, [["Yes", "In Office"], ["No", "Mobile"]], {}, {class: "form-control"}) %>
+
+	<%= field_set_tag "Property" do %>
+	<%= f.fields_for :property, @title_order.property do |property| %>
+
+		<%= property.label :street %>
+		<%= property.text_field :street, class: "form-control" %>
+
+		<%= property.label :city %>
+		<%= property.text_field :city, class: "form-control" %>
+
+		<%= property.label :state %>
+		<%= property.text_field :state, class: "form-control" %>
+
+		<%= property.label :zip %>
+		<%= property.text_field :zip, class: "form-control" %>
+
+	<% end %>
+	<% end %>
+
+	<%= field_set_tag "Agents" do %>
+
+	<%= f.label :buyers_agent_commission %>
+	<%= f.text_field :buyers_agent_commission, class: "form-control" %>
+
+	<%= f.label :sellers_agent_commission %>
+	<%= f.text_field :sellers_agent_commission, class: "form-control" %>
+
+	<% end %>
+
+	<%= field_set_tag "Lender" do %>
+
+	<%= f.fields_for :lender, @title_order.lender do |lender| %>
+
+		<%= lender.label :name %>
+		<%= lender.text_field :name, class: "form-control" %>
+
+		<%= lender.label :phone_number %>
+		<%= lender.telephone_field :phone_number, class: "form-control" %>
+
+		<%= lender.label :email %>
+		<%= lender.email_field :email, class: "form-control" %>
+
+	<% end %>
+
+	<% end %>
+
+	<%= field_set_tag "Buyer's Agent" do %>
+
+	<%= f.fields_for :buyers_agent, @title_order.buyers_agent do |buyers_agent| %>
+
+		<%= buyers_agent.label :first_name %>
+		<%= buyers_agent.text_field :first_name, class: "form-control" %>
+
+		<%= buyers_agent.label :last_name %>
+		<%= buyers_agent.text_field :last_name, class: "form-control" %>
+
+		<%= buyers_agent.label :phone_number %>
+		<%= buyers_agent.telephone_field :phone_number, class: "form-control" %>
+
+		<%= buyers_agent.label :email %>
+		<%= buyers_agent.email_field :email, class: "form-control" %>
+
+		<%= buyers_agent.label :license_number %>
+		<%= buyers_agent.text_field :license_number, class: "form-control" %>
+
+		<%= field_set_tag "Brokerage" do %>
+
+		<%= buyers_agent.fields_for :brokerage, @title_order.buyers_agent.brokerage do |brokerage| %>
+
+			<%= brokerage.label :name %>
+			<%= brokerage.text_field :name, class: "form-control" %>
+
+			<%= brokerage.label :license_number %>
+			<%= brokerage.text_field :license_number, class: "form-control" %>
+
+			<%= brokerage.fields_for :address, @title_order.buyers_agent.brokerage.address do |address| %>
+
+				<%= address.label :street %>
+				<%= address.text_field :street, class: "form-control" %>
+
+				<%= address.label :city %>
+				<%= address.text_field :city, class: "form-control" %>
+
+				<%= address.label :state %>
+				<%= address.text_field :state, class: "form-control" %>
+
+				<%= address. label :zip %>
+				<%= address.text_field :zip, class: "form-control" %>
+
+			<% end %>
+
+		<% end %>
+
+		<% end %>
+
+	<% end %>
+
+	<% end %>
+
+	<%= field_set_tag "Seller's Agent" do %>
+
+	<%= f.fields_for :sellers_agent, @title_order.sellers_agent do |sellers_agent| %>
+
+		<%= sellers_agent.label :first_name %>
+		<%= sellers_agent.text_field :first_name, class: "form-control" %>
+
+		<%= sellers_agent.label :last_name %>
+		<%= sellers_agent.text_field :last_name, class: "form-control" %>
+
+		<%= sellers_agent.label :phone_number %>
+		<%= sellers_agent.telephone_field :phone_number, class: "form-control" %>
+
+		<%= sellers_agent.label :email %>
+		<%= sellers_agent.email_field :email, class: "form-control" %>
+
+		<%= sellers_agent.label :license_number %>
+		<%= sellers_agent.text_field :license_number, class: "form-control" %>
+
+		<%= field_set_tag "Brokerage" do %>
+
+		<%= sellers_agent.fields_for :brokerage, @title_order.sellers_agent.brokerage do |brokerage2| %>
+
+			<%= brokerage2.label :name %>
+			<%= brokerage2.text_field :name, class: "form-control" %>
+
+			<%= brokerage2.label :license_number %>
+			<%= brokerage2.text_field :license_number, class: "form-control" %>
+
+			<%= brokerage2.fields_for :address, @title_order.sellers_agent.brokerage.address do |address2| %>
+
+				<%= address2.label :street %>
+				<%= address2.text_field :street, class: "form-control" %>
+
+				<%= address2.label :city %>
+				<%= address2.text_field :city, class: "form-control" %>
+
+				<%= address2.label :state %>
+				<%= address2.text_field :state, class: "form-control" %>
+
+				<%= address2. label :zip %>
+				<%= address2.text_field :zip, class: "form-control" %>
+
+			<% end %>
+
+		<% end %>
+
+		<% end %>
+
+	<% end %>
+
+	<% end %>
+
+	<%= f.label :survey_requested %>
+	<%= f.select(:survey_requested, [["Yes", true], ["No", false]], {}, {class: "form-control"}) %>
+
+	<%= f.label :notes %>
+	<%= f.text_area :notes, class: 'form-control' %>
+
+	<%= f.submit "Order Title", class: "btn btn-primary" %>
+
+<% end %>
