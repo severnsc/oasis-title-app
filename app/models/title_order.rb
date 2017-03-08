@@ -27,6 +27,10 @@ class TitleOrder < ApplicationRecord
 		lender = Lender.find_by_email(self.lender.email)
 		self.lender = lender if lender
 		property = Address.where(['street = ? and city = ? and state = ? and zip = ?', self.property.street, self.property.city, self.property.state, self.property.zip])
-		self.property = property unless property.empty?
+		self.property = property.first unless property.empty?
+		buyers_agent_brokerage = Brokerage.find_by_license_number(self.buyers_agent.brokerage.license_number)
+		self.buyers_agent.brokerage = buyers_agent_brokerage if buyers_agent_brokerage
+		sellers_agent_brokerage = Brokerage.find_by_license_number(self.sellers_agent.brokerage.license_number)
+		self.sellers_agent.brokerage = sellers_agent_brokerage if sellers_agent_brokerage
 	end
 end

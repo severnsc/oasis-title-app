@@ -4,10 +4,10 @@
 
 			<%= render 'shared/error_messages', object: f.object %>
 
-			<%= f.hidden_field :number_of_buyers, value: @number_of_buyers %>
+			<%= f.hidden_field :number_of_buyers, value: session[:number_of_buyers] %>
 
 			<%= field_set_tag "Buyers" do %>
-			<%= f.fields_for :buyers, [Buyer.new]*@number_of_buyers do |buyer| %>
+			<%= f.fields_for :buyers, [Buyer.new]*session[:number_of_buyers] do |buyer| %>
 
 				<h2>Buyer</h2>
 				
@@ -99,6 +99,8 @@
 				<%= buyers_agent.label :license_number %>
 				<%= buyers_agent.text_field :license_number, class: "form-control" %>
 
+				<%= field_set_tag "Brokerage" do %>
+
 				<%= buyers_agent.fields_for :brokerage, @title_order.buyers_agent.brokerage do |brokerage| %>
 
 					<%= brokerage.label :name %>
@@ -125,6 +127,8 @@
 
 				<% end %>
 
+				<% end %>
+
 			<% end %>
 
 			<% end %>
@@ -148,29 +152,33 @@
 				<%= sellers_agent.label :license_number %>
 				<%= sellers_agent.text_field :license_number, class: "form-control" %>
 
-				<%= sellers_agent.fields_for :brokerage, @title_order.sellers_agent.brokerage do |brokerage| %>
+				<%= field_set_tag "Brokerage" do %>
 
-					<%= brokerage.label :name %>
-					<%= brokerage.text_field :name, class: "form-control" %>
+				<%= sellers_agent.fields_for :brokerage, @title_order.sellers_agent.brokerage do |brokerage2| %>
 
-					<%= brokerage.label :license_number %>
-					<%= brokerage.text_field :license_number, class: "form-control" %>
+					<%= brokerage2.label :name %>
+					<%= brokerage2.text_field :name, class: "form-control" %>
 
-					<%= brokerage.fields_for :address, @title_order.sellers_agent.brokerage.address do |address| %>
+					<%= brokerage2.label :license_number %>
+					<%= brokerage2.text_field :license_number, class: "form-control" %>
 
-						<%= address.label :street %>
-						<%= address.text_field :street, class: "form-control" %>
+					<%= brokerage2.fields_for :address, @title_order.sellers_agent.brokerage.address do |address2| %>
 
-						<%= address.label :city %>
-						<%= address.text_field :city, class: "form-control" %>
+						<%= address2.label :street %>
+						<%= address2.text_field :street, class: "form-control" %>
 
-						<%= address.label :state %>
-						<%= address.text_field :state, class: "form-control" %>
+						<%= address2.label :city %>
+						<%= address2.text_field :city, class: "form-control" %>
 
-						<%= address. label :zip %>
-						<%= address.text_field :zip, class: "form-control" %>
+						<%= address2.label :state %>
+						<%= address2.text_field :state, class: "form-control" %>
+
+						<%= address2. label :zip %>
+						<%= address2.text_field :zip, class: "form-control" %>
 
 					<% end %>
+
+				<% end %>
 
 				<% end %>
 
