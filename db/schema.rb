@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308165715) do
+ActiveRecord::Schema.define(version: 20170308181626) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20170308165715) do
     t.boolean  "survey_requested",         default: true
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
+    t.text     "notes"
     t.index ["buyers_agent_id"], name: "index_title_orders_on_buyers_agent_id"
     t.index ["lender_id"], name: "index_title_orders_on_lender_id"
     t.index ["property_id"], name: "index_title_orders_on_property_id"

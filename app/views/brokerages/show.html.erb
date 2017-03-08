@@ -1,0 +1,15 @@
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<h2><%= @brokerage.name.capitalize %></h2>
+		<p><%= @brokerage.address.formatted %></p>
+		<p><%= @brokerage.license_number %></p>
+		<div class="agents">
+		<h2>Agents</h2>
+			<ul>
+				<% @brokerage.agents.each do |agent| %>
+					<li><%= link_to agent.name, agent_path(agent) %></li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>

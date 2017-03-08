@@ -24,6 +24,14 @@
 				<%= buyer.email_field :email, class: "form-control" %>
 
 			<% end %>
+
+			<% if session[:number_of_buyers] == 2 %>
+
+			<%= f.label :married, "Are the buyers married?" %>
+			<%= f.check_box :married, class: 'form-control' %>
+
+			<% end %>
+
 			<% end %>
 
 			<%= f.label :primary_residence, "Is this property going to be the buyer's primary residence?" %>
@@ -188,6 +196,9 @@
 
 			<%= f.label :survey_requested %>
 			<%= f.select(:survey_requested, [["Yes", true], ["No", false]], {}, {class: "form-control"}) %>
+
+			<%= f.label :notes %>
+			<%= f.text_area :notes, class: 'form-control' %>
 
 			<%= f.submit "Order Title", class: "btn btn-primary" %>
 

@@ -173,3 +173,10 @@ input{
     font-weight: normal;
   }
 }
+
+/* title order */
+
+.buyer, .address, .agent, .lender, .title{
+  width: 50%;
+  margin: 0 auto;
+}

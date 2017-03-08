@@ -1,0 +1,55 @@
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<h2>Buyers</h2>
+		<% @title_order.buyers.each do |buyer| %>
+			<div class="buyer">
+				<ul>
+					<li>Name: <%= buyer.full_name %></li>
+					<li>Phone: <%= buyer.phone_number %></li>
+					<li>Email: <%= buyer.email %></li>
+					<li>Address: <%= buyer.address.formatted %></li>
+				</ul>
+			</div>
+		<% end %>
+		<h2>Property</h2>
+		<div class="address"><ul><li><%= @title_order.property.formatted %></li></ul></div>
+		<h2>Buyers Agent</h2>
+		<div class="agent">
+			<ul>
+				<li>Name: <%= @title_order.buyers_agent.full_name %></li>
+				<li>Phone: <%= @title_order.buyers_agent.phone_number %></li>
+				<li>Email: <%= @title_order.buyers_agent.email %></li>
+				<li>License Number: <%= @title_order.buyers_agent.license_number %></li>
+				<li>Commission: <%= @title_order.buyers_agent_commission %></li>
+				<li>Brokerage: <%= link_to @title_order.buyers_agent.brokerage.name, brokerage_path(@title_order.buyers_agent.brokerage) %></li>
+			</ul>
+		</div>
+		<h2>Seller's Agent</h2>
+		<div class="agent">
+			<ul>
+				<li>Name: <%= @title_order.sellers_agent.full_name %></li>
+				<li>Phone: <%= @title_order.sellers_agent.phone_number %></li>
+				<li>Email: <%= @title_order.sellers_agent.email %></li>
+				<li>License Number: <%= @title_order.sellers_agent.license_number %></li>
+				<li>Commission: <%= @title_order.sellers_agent_commission %></li>
+				<li>Brokerage: <%= link_to @title_order.buyers_agent.brokerage.name, brokerage_path(@title_order.buyers_agent.brokerage) %></li>
+			</ul>
+		</div>
+		<h2>Lender</h2>
+		<div class="lender">
+			<ul>
+				<li>Name: <%= @title_order.lender.name %></li>
+				<li>Phone: <%= @title_order.lender.phone_number %></li>
+				<li>Email: <%= @title_order.lender.email %></li>
+			</ul>
+		</div>
+		<h2>Title Information</h2>
+		<div class="title">
+			<ul>
+				<li>Buyers taking title as: <%= @title_order.title_type %></li>
+				<li>Will buyers be present for the closing?: <%= @title_order.closing_type %></li>
+				<li>Was a survey requested?: <%= @title_order.survey_requested %></li>
+			</ul>
+		</div>
+	</div>
+</div>

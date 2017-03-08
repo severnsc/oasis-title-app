@@ -1,5 +1,5 @@
 class TitleOrder < ApplicationRecord
-	attr_accessor :primary_residence, :number_of_buyers
+	attr_accessor :primary_residence, :number_of_buyers, :married,:notes
 	belongs_to :property, class_name: "Address"
 	belongs_to :buyers_agent, class_name: "Agent"
 	belongs_to :sellers_agent, class_name: "Agent"
@@ -41,10 +41,8 @@ class TitleOrder < ApplicationRecord
 		self.sellers_agent.brokerage = sellers_agent_brokerage if sellers_agent_brokerage
 	end
 
-	def check_if_married
-		if self.title_type == "Husband & Wife"
-			self.buyers[0].spouse = self.buyers[1]
-			self.buyers[1].spouse = self.buyers[2]
-		end
+	def marry_buyers
+		self.buyers[0].spouse = self.buyers[1]
+		self.buyers[1].spouse = self.buyers[0]
 	end
 end

@@ -20,7 +20,7 @@ class TitleOrdersController < ApplicationController
 			buyer.address = @title_order.property if params[:primary_residence] = '1'
 		end
 		@title_order.sellers_agent.brokerage = @title_order.buyers_agent.brokerage if @title_order.buyers_agent.brokerage.license_number == @title_order.sellers_agent.brokerage.license_number
-		@title_order.check_if_married
+		@title_order.marry_buyers if params[:married] == '1'
 		if @title_order.save
 			flash[:success] = "Title order created!"
 			redirect_to title_order_path(@title_order)
@@ -31,6 +31,7 @@ class TitleOrdersController < ApplicationController
 	end
 
 	def show
+		@title_order = TitleOrder.find(params[:id])
 	end
 
 	def edit

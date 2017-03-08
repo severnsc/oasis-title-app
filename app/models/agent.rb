@@ -7,4 +7,8 @@ class Agent < ApplicationRecord
 	validates :license_number, presence: true
 	validates :brokerage, presence: true
 	accepts_nested_attributes_for :brokerage
+
+	def full_name
+		"#{self.first_name} #{self.last_name}"
+	end
 end
