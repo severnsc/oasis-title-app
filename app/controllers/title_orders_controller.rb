@@ -15,18 +15,12 @@ class TitleOrdersController < ApplicationController
 
 	def create
 		@title_order = TitleOrder.new(title_order_params)
-		@title_order.buyers.each do |buyer|
-			@buyer = Buyer.find_by_email(buyer.email)
-			unless @buyer.nil?
-				@title_order.buyers.delete(buyer)
-				@title_order.buyers << @buyer
-			end
-		end
 		@title_order.check_if_params_exist
 		@title_order.buyers.each do |buyer|
 			buyer.address = @title_order.property if params[:primary_residence] = '1'
 		end
 		@title_order.sellers_agent.brokerage = @title_order.buyers_agent.brokerage if @title_order.buyers_agent.brokerage.license_number == @title_order.sellers_agent.brokerage.license_number
+		@title_order.check_if_married
 		if @title_order.save
 			flash[:success] = "Title order created!"
 			redirect_to title_order_path(@title_order)

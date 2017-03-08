@@ -20,6 +20,13 @@ class TitleOrder < ApplicationRecord
 	accepts_nested_attributes_for :buyers
 
 	def check_if_params_exist
+		self.buyers.each do |buyer|
+			@buyer = Buyer.find_by_email(buyer.email)
+			unless @buyer.nil?
+				self.buyers.delete(buyer)
+				self.buyers << @buyer
+			end
+		end
 		buyers_agent = Agent.find_by_email(self.buyers_agent.email)
 		self.buyers_agent = buyers_agent if buyers_agent
 		sellers_agent = Agent.find_by_email(self.sellers_agent.email)
@@ -32,5 +39,12 @@ class TitleOrder < ApplicationRecord
 		self.buyers_agent.brokerage = buyers_agent_brokerage if buyers_agent_brokerage
 		sellers_agent_brokerage = Brokerage.find_by_license_number(self.sellers_agent.brokerage.license_number)
 		self.sellers_agent.brokerage = sellers_agent_brokerage if sellers_agent_brokerage
+	end
+
+	def check_if_married
+		if self.title_type == "Husband & Wife"
+			self.buyers[0].spouse = self.buyers[1]
+			self.buyers[1].spouse = self.buyers[2]
+		end
 	end
 end
