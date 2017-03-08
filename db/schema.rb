@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308201751) do
+ActiveRecord::Schema.define(version: 20170308220039) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -89,6 +89,17 @@ ActiveRecord::Schema.define(version: 20170308201751) do
     t.index ["lender_id"], name: "index_title_orders_on_lender_id"
     t.index ["property_id"], name: "index_title_orders_on_property_id"
     t.index ["sellers_agent_id"], name: "index_title_orders_on_sellers_agent_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "remember_digest"
+    t.boolean  "admin"
+    t.string   "reset_digest"
+    t.datetime "reset_Sent_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

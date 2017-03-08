@@ -4,7 +4,7 @@ class BuyerTest < ActiveSupport::TestCase
  
    def setup
 	   	@address = addresses(:office)
-	   	@buyer = Buyer.new(first_name: "Chris", last_name: "Severns", phone_number: "9548120543", email: "severnsc@gmail.com", address: @address)
+	   	@buyer = Buyer.new(first_name: "Chris", last_name: "Severns", phone_number: "9548120543", email: "severnsc@gmail.com", address: @address, mailing_address: @address)
    end
 
    test "should be valid" do
