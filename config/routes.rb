@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :brokerages, only: [:show]
   
   resources :agents, only: [:show]
+
+  resources :users
 end
