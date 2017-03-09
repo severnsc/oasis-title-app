@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :agents, only: [:show]
 
   resources :users
+
+  resources :account_activation, only: [:edit]
 end

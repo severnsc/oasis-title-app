@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308220039) do
+ActiveRecord::Schema.define(version: 20170309164621) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -97,9 +97,12 @@ ActiveRecord::Schema.define(version: 20170308220039) do
     t.string   "remember_digest"
     t.boolean  "admin",           default: false
     t.string   "reset_digest"
-    t.datetime "reset_Sent_at"
+    t.datetime "reset_sent_at"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.string   "name"
+    t.boolean  "activated",       default: false
+    t.datetime "activated_at"
   end
 
 end
