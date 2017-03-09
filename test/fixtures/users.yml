@@ -6,7 +6,7 @@ one:
   remember_digest: MyString
   admin: false
   reset_digest: MyString
-  reset_Sent_at: 2017-03-08 17:00:39
+  reset_sent_at: 2017-03-08 17:00:39
 
 two:
   email: MyString
@@ -14,4 +14,4 @@ two:
   remember_digest: MyString
   admin: false
   reset_digest: MyString
-  reset_Sent_at: 2017-03-08 17:00:39
+  reset_sent_at: 2017-03-08 17:00:39

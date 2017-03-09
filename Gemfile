@@ -10,6 +10,7 @@ end
 gem 'rails', '~> 5.0.2'
 gem 'bootstrap-sass', '3.3.6'
 gem 'figaro'
+gem 'rails-controller-testing'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
