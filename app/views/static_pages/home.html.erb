@@ -3,10 +3,10 @@
 	<%= image_tag('banner.jpg', width: '100%', id: 'home-banner') %>
 	<div class="row" id="buttons">
 		<div class="col-md-6">
-			<%= button_to "Request a Quote", new_title_order_path, method: :get, class: 'btn btn-primary btn-block' %>
+			<%= button_to "Request a Quote", request_quote_path, method: :get, class: 'btn btn-primary btn-block' %>
 		</div>
 		<div class="col-md-6">
-			<%= button_to "Order a Title", new_title_order_path, method: :get, class: 'btn btn-primary btn-block' %>		
+			<%= button_to "Order a Title", number_of_buyers_path, method: :get, class: 'btn btn-primary btn-block' %>		
 		</div>
 	</div>
 	<div class="row">

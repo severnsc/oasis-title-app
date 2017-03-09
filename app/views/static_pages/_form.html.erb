@@ -1,0 +1,6 @@
+<p>How many buyers are there?</p>
+<%= form_tag(new_title_order_path, method: :get) do -%>
+	<%= select_tag("number_of_buyers", '<option>1</option><option>2</option><option>3</option><option>4</option>'.html_safe) %>
+	<%= hidden_field_tag 'quote', yield(:quote) %>
+	<%= submit_tag "Submit", class: 'btn btn-primary' %>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309175841) do
+ActiveRecord::Schema.define(version: 20170309213916) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -82,9 +82,10 @@ ActiveRecord::Schema.define(version: 20170309175841) do
     t.string   "buyers_agent_commission"
     t.string   "sellers_agent_commission"
     t.boolean  "survey_requested",         default: true
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.text     "notes"
+    t.boolean  "quote",                    default: false
     t.index ["buyers_agent_id"], name: "index_title_orders_on_buyers_agent_id"
     t.index ["lender_id"], name: "index_title_orders_on_lender_id"
     t.index ["property_id"], name: "index_title_orders_on_property_id"

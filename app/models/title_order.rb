@@ -28,6 +28,7 @@ class TitleOrder < ApplicationRecord
 			end
 		end
 		self.buyers.each do |buyer|
+			buyer.build_mailing_address
 			mailing_address = Address.where(['street = ? and city = ? and state = ? and zip = ?', buyer.mailing_address.street, buyer.mailing_address.city, buyer.mailing_address.state, buyer.mailing_address.zip])
 			buyer.mailing_address = mailing_address.first unless mailing_address.empty?
 		end

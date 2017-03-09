@@ -21,6 +21,7 @@ class TitleOrdersController < ApplicationController
 		end
 		@title_order.sellers_agent.brokerage = @title_order.buyers_agent.brokerage if @title_order.buyers_agent.brokerage.license_number == @title_order.sellers_agent.brokerage.license_number
 		@title_order.marry_buyers if params[:married] == '1'
+		@title_order.quote = true if params[:quote] == '1'
 		if @title_order.save
 			flash[:success] = "Title order created!"
 			redirect_to title_order_path(@title_order)

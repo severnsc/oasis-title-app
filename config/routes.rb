@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   get '/login', to: "sessions#new"
 
+  get '/title-order', to: 'static_pages#title_order', as: 'number_of_buyers'
+
+  get '/request-quote', to: 'static_pages#request_quote'
+
   post '/login', to: 'sessions#create'
 
   delete '/logout', to: 'sessions#destroy'

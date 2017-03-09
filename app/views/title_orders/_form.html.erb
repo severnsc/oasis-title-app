@@ -1,8 +1,15 @@
+<% if params[:quote] == '1' %>
+	<h1>Request a Quote</h1>
+<% else %>
+	<h1>Order a Title</h1>
+<% end %>
 <%= form_for @title_order do |f| %>
 
 	<%= render 'shared/error_messages', object: f.object %>
 
 	<%= f.hidden_field :number_of_buyers, value: session[:number_of_buyers] %>
+
+	<%= f.hidden_field :quote, value: params[:quote] %>
 
 	<%= field_set_tag "Property" do %>
 	<%= f.fields_for :property, @title_order.property do |property| %>
