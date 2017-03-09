@@ -8,6 +8,11 @@
       <li><%= link_to "About",   '#' %></li>
       <li><%= link_to "Contact", '#' %></li>
       <li><a href="http://news.railstutorial.org/">News</a></li>
+      <% if logged_in? %>
+        <li><%= link_to "Log out", logout_path %>
+      <% else %>
+        <li><%= link_to "Log in", login_path %>
+      <% end %>
     </ul>
   </nav>
 </footer>
