@@ -23,6 +23,13 @@ class UserTest < ActiveSupport::TestCase
 		end
 	end
 
+	test "email should save as downcase" do
+		mixed_case_email = "TeSt@ExAmPlE.CoM"
+		@user.email = mixed_case_email
+		@user.save
+		assert_equal mixed_case_email.downcase, @user.reload.email
+	end
+
 	test "should have password" do
 		@user.password = " "*8
 		assert_not @user.valid?
