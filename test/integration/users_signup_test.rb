@@ -30,6 +30,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 											   password_confirmation: "password"}}
 		end
 		assert_equal 1, ActionMailer::Base.deliveries.size
+		assert_redirected_to root_path
 		user = assigns(:user)
 		assert_not user.activated?
 		get edit_account_activation_path("invalid token", email: user.email)

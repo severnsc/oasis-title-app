@@ -1,3 +1,40 @@
-<div class="center jumbotron">
+<div class="center jumbotron" id="home">
 	<h1>Oasis Title Company</h1>
+	<%= image_tag('banner.jpg', width: '100%', id: 'home-banner') %>
+	<div class="row" id="buttons">
+		<div class="col-md-6">
+			<%= button_to "Request a Quote", new_title_order_path, method: :get, class: 'btn btn-primary btn-block' %>
+		</div>
+		<div class="col-md-6">
+			<%= button_to "Order a Title", new_title_order_path, method: :get, class: 'btn btn-primary btn-block' %>		
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<h2>Who We Are</h2>
+			<p>Oasis Title Company is a trusted Florida title company. Providing Florida real estate closings, title insurance, title searches, and escrow services since 2002, Oasis Title is owned by real estate attorney Lawrence Weisberg, Esq., founder and president of our sister company, Weisberg & Associates, P.A.</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Discout Title Insurance</h2>
+			<p>Title insurance is a major third party and closing expense. You can spend a lot more than you need to on it by not shopping around. Save money by using Oasis Title Company for discount title insurance. We can beat all competitors title insurance premium quotes by 10%. Find out how we work hard to save you money.</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Short Sale Services</h2>
+			<p>Oasis Title Company’s Short Sale Department is South Florida’s leading short sale/loss mitigation company. With over 10 years of experience in working with lenders and mortgage companies, we have developed an extremely successful, and streamlined process for working with short sales.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<h2>Homeowner Services</h2>
+			<p>From start to finish we will answer all your questions and concerns about title insurance in Florida, and lead you every step of the way until you close. We are a Full Service Title, Escrow and Settlement Agency.</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Lender Services</h2>
+			<p>Our Florida mortgage title insurance team is committed to providing the highest quality title, escrow and closing services available to the real estate lending industry today. Our Florida mortgage title insurance staff is experienced, professional, friendly, and armed with the latest systems and technology to ensure that all of your transactions are handled properly.</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Realtor Services</h2>
+			<p>We at Oasis Title Company understand that the positive experiences are what create the confidence in a company. This is why we work diligently to meet the deadlines set in the purchase and sale contracts, have unparalleled customer service, and offer free short sale services to real estate agents!</p>
+		</div>
+	</div>
 </div>

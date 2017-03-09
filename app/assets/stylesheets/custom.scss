@@ -83,12 +83,21 @@ footer {
   padding-top: 5px;
   border-top: 1px solid $gray-medium-light;
   color: $gray-light;
+  background-color: black;
+  height:500px;
 	a {
 	  color: $gray;
 		&:hover {
 		  color: $gray-darker;
 		}
 	}
+  h2 {
+    text-align: left;
+  }
+  p{
+    text-align: center;
+    color: $gray-light;
+  }
 	small {
 	  float: left;
 	}
@@ -194,4 +203,18 @@ input{
 /*orders*/
 .title-order{
   border-bottom: 1px solid $gray-medium-light;
+}
+
+/* Home */
+#home-banner, #buttons{
+  margin: 10px 0;
+}
+
+#home {
+  background-color: #fff;
+}
+
+#home p{
+  font-size: 16px;
+  text-align: justify;
 }

@@ -1,13 +1,8 @@
 <footer class="footer">
-  <small>
-    The <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-    by <a href="http://www.michaelhartl.com/">Michael Hartl</a>
-  </small>
   <nav>
     <ul>
       <li><%= link_to "About",   '#' %></li>
       <li><%= link_to "Contact", '#' %></li>
-      <li><a href="http://news.railstutorial.org/">News</a></li>
       <% if logged_in? %>
         <li><%= link_to "Log out", logout_path %>
       <% else %>
@@ -15,4 +10,15 @@
       <% end %>
     </ul>
   </nav>
+  <div class='col-md-4'>
+    <h2>Download our brochure</h2>
+    <%= link_to image_tag('brichure.png', width: '100'), asset_path('brochure.pdf') %>
+  </div>
+  <div class='col-md-4'>
+    <p>COPYRIGHT © OASIS TITLE COMPANY, INC. ALL RIGHTS RESERVED.
+
+
+Oasis Title Company, Inc. & Oasis Short Sales are not associated with the government, and our service is not approved by the government or your lender. Even if you accept this offer and use our service, your lender may not agree to change your loan. If you stop paying your mortgage, you could lose your home and damage your credit rating.</p>
+<%= link_to image_tag('weisberg.png'), 'http://weisberglegal.com' %>
+  </div>
 </footer>

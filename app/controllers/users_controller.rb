@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 		if @user.save
 			@user.send_activation_email
 			flash[:info] = "Please check your email for the activation link"
-			redirect_to new_title_order_path
+			redirect_to root_path
 		else
 			render 'new'
 		end
