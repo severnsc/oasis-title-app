@@ -1,5 +1,21 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<h1><%= @user.name.capitalize %></h1>
+    <% if @user.title_orders.any? %>
+      <% @user.title_orders.each do |order| %>
+        <div class="title-order">
+          <p><%= order.property.formatted %></p>
+          <% order.buyers.each do |buyer| %>
+            <p><%= buyer.full_name %></p>
+          <% end %>
+          <p><%= order.buyers_agent.full_name %></p>
+          <p><%= order.sellers_agent.full_name %></p>
+          <p><%= link_to "View order", title_order_path(order) %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <h2>You don't have any title orders yet! Create one now:</h2>
+      <h2><%= link_to "New Title Order", new_title_order_path %></h2>
+    <% end %>
 	</div>
 </div>
