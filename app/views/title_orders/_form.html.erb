@@ -114,14 +114,14 @@
 	<% if session[:number_of_buyers] == 2 %>
 
 	<%= f.label :married, "Are the buyers married?" %>
-	<%= f.check_box :married, class: 'form-control' %>
+	<%= f.check_box :married %>
 
 	<% end %>
 
 	<% end %>
 
 	<%= f.label :primary_residence, "Is this property going to be the buyer's primary residence?" %>
-	<%= f.check_box :primary_residence, class: "form-control" %>
+	<%= f.check_box :primary_residence %>
 
 	<%= f.label :title_type, "How are the buyers taking the title?" %>
 	<%= f.select(:title_type, [["Husband & Wife", "Husband & Wife"], ["Joint tenants with Right of survivorship", "Joint tenants with Right of survivorship"], ["Tenants in Common", "Tenants in Common"], ["In Entity Name", "In Entity Name"], ["As a married man", "As a married man"], ["As a married woman", "As a married woman"], ["As a single man", "As a single man"], ["As a single woman", "As a single woman"]], {}, {class: "form-control"}) %>
