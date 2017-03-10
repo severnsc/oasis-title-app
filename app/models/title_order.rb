@@ -4,6 +4,7 @@ class TitleOrder < ApplicationRecord
 	belongs_to :buyers_agent, class_name: "Agent"
 	belongs_to :sellers_agent, class_name: "Agent"
 	belongs_to :lender, optional: true
+	belongs_to :user
 	has_and_belongs_to_many :buyers
 	validates :property, presence: true
 	validates :buyers_agent, presence: true

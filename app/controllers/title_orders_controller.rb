@@ -1,7 +1,9 @@
 class TitleOrdersController < ApplicationController
+	before_action :logged_in
+	before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
 	def new
-		@title_order = TitleOrder.new
+		@title_order = current_user.title_orders.build
 		@title_order.build_buyers_agent
 		@title_order.build_sellers_agent
 		@title_order.buyers_agent.build_brokerage
@@ -14,7 +16,7 @@ class TitleOrdersController < ApplicationController
 	end
 
 	def create
-		@title_order = TitleOrder.new(title_order_params)
+		@title_order = current_user.title_orders.build(title_order_params)
 		@title_order.check_if_params_exist
 		@title_order.buyers.each do |buyer|
 			buyer.address = @title_order.property if params[:primary_residence] = '1'
@@ -67,7 +69,17 @@ class TitleOrdersController < ApplicationController
 
 	private
 
+	def logged_in
+		redirect_to root_path unless logged_in?
+	end
+
+	def correct_user
+		@title_order = TitleOrder.find(params[:id])
+		@user = @title_order.user
+		redirect_to root_path unless current_user?(@user) || current_user.admin?
+	end
+
 	def title_order_params
-		params.require(:title_order).permit(:number_of_buyers, :title_type, :closing_type, :sellers_agent_commission, :buyers_agent_commission, :survey_requested, buyers_attributes: [:id, :first_name, :last_name, :phone_number, :email], property_attributes: [:id, :street, :city, :state, :zip], lender_attributes: [:id, :name, :phone_number, :email], buyers_agent_attributes: [:id, :first_name, :last_name, :license_number, :phone_number, :email, brokerage_attributes: [:id, :name, :license_number, address_attributes: [:id, :street, :city, :state, :zip]]], sellers_agent_attributes: [:id, :first_name, :last_name, :license_number, :phone_number, :email, brokerage_attributes: [:id, :name, :license_number, address_attributes:[:id, :street, :city, :state, :zip]]])
+		params.require(:title_order).permit(:number_of_buyers, :title_type, :closing_type, :sellers_agent_commission, :buyers_agent_commission, :survey_requested, :notes, buyers_attributes: [:id, :first_name, :last_name, :phone_number, :email, mailing_address_attributes: [:street, :city, :state, :zip]], property_attributes: [:id, :street, :city, :state, :zip], lender_attributes: [:id, :name, :phone_number, :email], buyers_agent_attributes: [:id, :first_name, :last_name, :license_number, :phone_number, :email, brokerage_attributes: [:id, :name, :license_number, address_attributes: [:id, :street, :city, :state, :zip]]], sellers_agent_attributes: [:id, :first_name, :last_name, :license_number, :phone_number, :email, brokerage_attributes: [:id, :name, :license_number, address_attributes:[:id, :street, :city, :state, :zip]]])
 	end
 end
