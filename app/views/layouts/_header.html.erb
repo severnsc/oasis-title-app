@@ -36,6 +36,16 @@
               <li><%= link_to "Homeowner Services", homeowner_services_path %></li>
             </ul>
           </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Closing Costs", closing_costs_path %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Glossary", glossary_path %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Title FAQ", title_faq_path %></li>
+            </ul>
+          </li>
           <li><%= link_to "Blog", '#' %></li>
           <% if logged_in? %>
             <li><%= link_to "Users", users_path %></li>

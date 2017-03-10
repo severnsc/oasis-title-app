@@ -16,7 +16,13 @@ Rails.application.routes.draw do
 
   get '/lender-services', to:'static_pages#lender_services'
 
-  get 'homeowner-services', to:'static_pages#homeowner_services'
+  get '/homeowner-services', to:'static_pages#homeowner_services'
+
+  get '/closing-costs', to:'static_pages#closing_costs'
+
+  get '/glossary', to: 'static_pages#glossary'
+
+  get '/title-faq', to:'static_pages#title_faq'
 
   resources :password_reset, only: [:new, :create, :edit, :update]
 

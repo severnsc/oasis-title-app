@@ -35,4 +35,13 @@ class StaticPagesController < ApplicationController
 
   def homeowner_services
   end
+
+  def closing_costs
+  end
+
+  def glossary
+  end
+
+  def title_faq
+  end
 end
