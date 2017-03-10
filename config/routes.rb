@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   get 'homeowner-services', to:'static_pages#homeowner_services'
 
+  resources :password_reset, only: [:new, :create, :edit, :update]
+
   resources :title_orders
 
   resources :brokerages, only: [:show]
