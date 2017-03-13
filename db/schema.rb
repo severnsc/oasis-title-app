@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170310213636) do
+ActiveRecord::Schema.define(version: 20170313154803) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 20170310213636) do
     t.index ["address_id"], name: "index_brokerages_on_address_id"
   end
 
+  create_table "buyer_title_orders", force: :cascade do |t|
+    t.integer  "buyer_id"
+    t.integer  "title_order_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["buyer_id"], name: "index_buyer_title_orders_on_buyer_id"
+    t.index ["title_order_id"], name: "index_buyer_title_orders_on_title_order_id"
+  end
+
   create_table "buyers", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -55,13 +64,6 @@ ActiveRecord::Schema.define(version: 20170310213636) do
     t.index ["address_id"], name: "index_buyers_on_address_id"
     t.index ["mailing_address_id"], name: "index_buyers_on_mailing_address_id"
     t.index ["spouse_id"], name: "index_buyers_on_spouse_id"
-  end
-
-  create_table "buyers_title_orders", id: false, force: :cascade do |t|
-    t.integer "buyer_id"
-    t.integer "title_order_id"
-    t.index ["buyer_id"], name: "index_buyers_title_orders_on_buyer_id"
-    t.index ["title_order_id"], name: "index_buyers_title_orders_on_title_order_id"
   end
 
   create_table "lenders", force: :cascade do |t|
