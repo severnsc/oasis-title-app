@@ -39,4 +39,14 @@ class TitleOrder < ApplicationRecord
 #	def marry_buyers
 #		self.buyers.each_with_index {|buyer, i| buyer.spouse = self.buyers[i-1]}
 #	end
+
+	private
+
+	def buyer_invalid?(attributes)
+		return true if attributes['buyer_attributes']['first_name']
+		return true if attributes['buyer_attributes']['last_name'].blank?
+		return true if attributes['buyer_attributes']['phone_number'].blank?
+		return true if attributes['buyer_attributes']['email'].blank?
+	end
+
 end
