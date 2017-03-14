@@ -62,7 +62,7 @@ class TitleOrdersController < ApplicationController
 	end
 
 	def index
-		@title_orders = TitleOrder.all
+		current_user.admin? ? @title_orders = TitleOrder.all : @title_orders = current_user.title_orders
 	end
 
 	def destroy

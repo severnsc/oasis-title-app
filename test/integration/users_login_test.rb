@@ -1,7 +1,7 @@
 class UsersLoginTest < ActionDispatch::IntegrationTest
 
 	def setup
-		@user = users(:chris)
+		@user = build(:admin)
 	end
 
 	test "invalid login info" do

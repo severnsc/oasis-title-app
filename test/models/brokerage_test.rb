@@ -3,7 +3,7 @@ require 'test_helper'
 class BrokerageTest < ActiveSupport::TestCase
 
 	def setup
-		@address = addresses(:office)
+		@address = build(:address)
 		@brokerage = Brokerage.new(address: @address, name: "Agency Luxe", license_number: "BK123456")
 	end
 
@@ -13,16 +13,6 @@ class BrokerageTest < ActiveSupport::TestCase
 
 	test "should have an address" do
 		@brokerage.address  = nil
-		assert_not @brokerage.valid?
-	end
-
-	test "should have a name" do
-		@brokerage.name = "  "
-		assert_not @brokerage.valid?
-	end
-
-	test "should have a license number" do
-		@brokerage.license_number = "  "
 		assert_not @brokerage.valid?
 	end
 end

@@ -5,3 +5,10 @@ chris:
   admin: true
   activated: true
   activated_at: <%= Time.zone.now %>
+larry:
+  email: "larry@theagencyluxe.com"
+  name: "Larry Weisberg"
+  password_digest: <%= User.digest('password') %>
+  admin: false
+  activated: true
+  activated_at: <%= Time.zone.now %>

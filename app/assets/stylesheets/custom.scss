@@ -236,3 +236,11 @@ input{
 #our_team img{
   width:100%;
 }
+
+/* Users index */
+.user{
+  border-bottom: 1px solid $gray-medium-light;
+  li{
+    list-style-type: none;
+  }
+}
