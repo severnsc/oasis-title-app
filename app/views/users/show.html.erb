@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-		<h1><%= @user.name.capitalize %></h1>
+		<h1><%= @user.name %></h1>
     <% if @user.title_orders.any? %>
       <% @user.title_orders.each do |order| %>
         <div class="title-order">

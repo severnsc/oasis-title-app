@@ -31,7 +31,8 @@ class TitleOrdersController < ApplicationController
 			current_user.title_orders << @title_order
 			current_user.save
 			flash[:success] = "title order created"
-			redirect_to root_path
+			session.delete(:number_of_buyers)
+			redirect_to title_order_path(@title_order)
 		else
 			render 'new'
 		end
@@ -51,7 +52,6 @@ class TitleOrdersController < ApplicationController
 		@title_order.buyers.each do |buyer|
 			buyer.address = @title_order.property if params[:primary_residence] = '1'
 		end
-		#byebug
 		if @title_order.update_attributes(title_order_params)
 			flash[:success] = "Title order updated!"
 			redirect_to title_order_path(@title_order)
@@ -68,7 +68,7 @@ class TitleOrdersController < ApplicationController
 	def destroy
 		@title_order = TitleOrder.find(params[:id])
 		@title_order.delete
-		redirect_to new_title_order_path
+		redirect_to current_user
 	end
 
 	private
