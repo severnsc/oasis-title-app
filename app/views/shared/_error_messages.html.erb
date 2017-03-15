@@ -4,8 +4,14 @@
 			The form contatins <%= pluralize(object.errors.count, "error") %>
 		</div>
 		<ul>
-		<% object.errors.full_messages.each do |msg| %>
-			<li><%= msg %></li>
+		<% object.errors.each do |atr, msg| %>
+			<li>
+			<% if atr.to_s.include? "base" %>
+				<%= msg %>
+			<% else %>
+				<%= object.errors.full_message(atr, msg) %>
+			<% end %>
+			</li>
 		<% end %>
 		</ul>
 	</div>

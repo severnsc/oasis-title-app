@@ -34,8 +34,6 @@
 	<%= field_set_tag "Buyers" do %>
 	<%= f.fields_for :buyer_title_orders, @title_order.buyer_title_orders do |bto| %>
 
-	<%= render 'shared/error_messages', object: bto.object %>
-
 		<%= field_set_tag "Buyer" do %>
 		<%= bto.fields_for :buyer do |buyer| %>
 
@@ -225,7 +223,7 @@
 	<%= f.label :notes %>
 	<%= f.text_area :notes, class: 'form-control' %>
 
-	<% if params[:quote] = '1' %>
+	<% if params[:quote] == '1' %>
 		<%= f.submit "Request Quote", class: 'btn btn-primary' %>
 	<% else %>
 		<%= f.submit "Order Title", class: 'btn btn-primary' %>

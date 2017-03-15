@@ -20,6 +20,45 @@ class TitleOrder < ApplicationRecord
 	accepts_nested_attributes_for :buyers_agent
 	accepts_nested_attributes_for :sellers_agent
 	accepts_nested_attributes_for :lender
+	validate :child_attr
+
+	def child_attr
+		errors.add(:base, "Property must have street") if property.street.blank?
+		errors.add(:base, "Property must have city") if property.city.blank?
+		errors.add(:base, "Property must have state") if property.state.blank?
+		errors.add(:base, "Property must have zip") if property.zip.blank?
+		errors.add(:base, "Lender must have name") if lender.name.blank?
+		errors.add(:base, "Lender must have phone number") if lender.phone_number.blank?
+		errors.add(:base, "Lender must have email") if lender.email.blank?
+		errors.add(:base, "Buyers agent must have first name") if buyers_agent.first_name.blank?
+		errors.add(:base, "Buyers agent must have last name") if buyers_agent.last_name.blank?
+		errors.add(:base, "Buyers agent must have phone number") if buyers_agent.phone_number.blank?
+		errors.add(:base, "Buyers agent must have email") if buyers_agent.email.blank?
+		errors.add(:base, "Buyers agent must have license number") if buyers_agent.license_number.blank?
+		errors.add(:base, "Sellers agent must have first name") if sellers_agent.first_name.blank?
+		errors.add(:base, "Sellers agent must have last name") if sellers_agent.last_name.blank?
+		errors.add(:base, "Sellers agent must have phone number") if sellers_agent.phone_number.blank?
+		errors.add(:base, "Sellers agent must have email") if sellers_agent.email.blank?
+		errors.add(:base, "Sellers agent must have license number") if sellers_agent.license_number.blank?
+	end
+
+	def check_params(params)
+		buyer_title_orders.each_with_index do |bto, i| 
+			bto.build_buyer(params['buyer_title_orders_attributes']["#{i}"]['buyer_attributes'])
+		end
+		if params['primary_residence'] == '1'
+			buyer_title_orders.each do |bto|
+				bto.buyer.address = property
+			end
+		else
+			buyer_title_orders.each do |bto|
+				bto.buyer.address = bto.buyer.mailing_address
+			end
+		end
+		build_buyers_agent(params['buyers_agent_attributes'])
+		build_sellers_agent(params['sellers_agent_attributes'])
+		marry_buyers if params['married'] == '1'
+	end
 
 	def lender_attributes=(attributes)
 		self.lender = Lender.where(attributes).first_or_create

@@ -19,6 +19,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 		assert_template 'sessions/new'
 		post login_path, params: { session: { email: @user.email,
 											  password: "password"}}
+		flash.each {|k, v| puts v}
 		assert_redirected_to user_path(@user)
 		follow_redirect!
 		assert_template 'users/show'
