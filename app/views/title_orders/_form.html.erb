@@ -34,6 +34,8 @@
 	<%= field_set_tag "Buyers" do %>
 	<%= f.fields_for :buyer_title_orders, @title_order.buyer_title_orders do |bto| %>
 
+	<%= render 'shared/error_messages', object: bto.object %>
+
 		<%= field_set_tag "Buyer" do %>
 		<%= bto.fields_for :buyer do |buyer| %>
 

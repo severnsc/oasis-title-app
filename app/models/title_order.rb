@@ -21,23 +21,20 @@ class TitleOrder < ApplicationRecord
 	accepts_nested_attributes_for :sellers_agent
 	accepts_nested_attributes_for :lender
 
-	def params_check
-		buyers_agent = Agent.find_by_email(self.buyers_agent.email)
-		self.buyers_agent = buyers_agent if buyers_agent
-		sellers_agent = Agent.find_by_email(self.sellers_agent.email)
-		self.sellers_agent = sellers_agent if sellers_agent
-		lender = Lender.find_by_email(self.lender.email)
-		self.lender = lender if lender
-		property = Address.where(['street = ? and city = ? and state = ? and zip = ?', self.property.street, self.property.city, self.property.state, self.property.zip])
-		self.property = property.first unless property.empty?
-		buyers_agent_brokerage = Brokerage.find_by_license_number(self.buyers_agent.brokerage.license_number)
-		self.buyers_agent.brokerage = buyers_agent_brokerage if buyers_agent_brokerage
-		sellers_agent_brokerage = Brokerage.find_by_license_number(self.sellers_agent.brokerage.license_number)
-		self.sellers_agent.brokerage = sellers_agent_brokerage if sellers_agent_brokerage
-		self.buyer_title_orders.each do |bto|
-			buyer = Buyer.find_by_email(bto.buyer.email)
-			bto.buyer = buyer if buyer
-		end
+	def lender_attributes=(attributes)
+		self.lender = Lender.where(attributes).first_or_create
+	end
+
+	def buyers_agent_attributes=(attributes)
+		self.buyers_agent = Agent.where("first_name = ? AND last_name = ? AND phone_number = ? AND email = ? AND license_number =?", attributes[:first_name], attributes[:last_name], attributes[:phone_number], attributes[:email], attributes[:license_number]).first_or_create
+	end
+
+	def sellers_agent_attributes=(attributes)
+		self.sellers_agent = Agent.where("first_name = ? AND last_name = ? AND phone_number = ? AND email = ? AND license_number =?", attributes[:first_name], attributes[:last_name], attributes[:phone_number], attributes[:email], attributes[:license_number]).first_or_create
+	end
+
+	def property_attributes=(attributes)
+		self.property = Address.where(attributes).first_or_create
 	end
 
 	def marry_buyers

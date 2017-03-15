@@ -5,7 +5,6 @@ class TitleOrdersController < ApplicationController
 	def new
 		@title_order = TitleOrder.new
 		params[:number_of_buyers] ? session[:number_of_buyers] = params[:number_of_buyers].to_i : session[:number_of_buyers] = 1
-		@buyers = []
 		session[:number_of_buyers].times {@title_order.buyer_title_orders.build.build_buyer.build_mailing_address}
 		@title_order.build_property
 		@title_order.build_lender
@@ -15,9 +14,9 @@ class TitleOrdersController < ApplicationController
 
 	def create
 		@title_order = TitleOrder.new(title_order_params)
-		@title_order.params_check
-		@title_order.user = current_user
-		@title_order.marry_buyers if params[:married] == '1'
+		@title_order.buyer_title_orders.each_with_index do |bto, i| 
+			bto.build_buyer(title_order_params['buyer_title_orders_attributes']["#{i}"]['buyer_attributes'])
+		end
 		if params[:primary_residence] == '1'
 			@title_order.buyer_title_orders.each do |bto|
 				bto.buyer.address = @title_order.property
@@ -27,6 +26,8 @@ class TitleOrdersController < ApplicationController
 				bto.buyer.address = bto.buyer.mailing_address
 			end
 		end
+		@title_order.user = current_user
+		@title_order.marry_buyers if params[:married] == '1'
 		if @title_order.save
 			current_user.title_orders << @title_order
 			current_user.save
@@ -98,6 +99,6 @@ class TitleOrdersController < ApplicationController
 			buyer_title_orders_attributes: [:id, buyer_attributes: [:id, :first_name, :last_name, :phone_number, :email, mailing_address_attributes: [:street, :city, :state, :zip]]],
 		  lender_attributes: [:name, :phone_number, :email],
 		  buyers_agent_attributes: [:first_name, :last_name, :phone_number, :email, :license_number, brokerage_attributes: [:name, :license_number, address_attributes: [:street, :city, :state, :zip]]],
-		  sellers_agent_attributes: [:first_name, :last_name, :phone_number, :email, :license_number, brokerage_attributes: [:name, :license_number, address_attributes: [:steet, :city, :state, :zip]]])
+		  sellers_agent_attributes: [:first_name, :last_name, :phone_number, :email, :license_number, brokerage_attributes: [:name, :license_number, address_attributes: [:street, :city, :state, :zip]]])
 	end
 end
