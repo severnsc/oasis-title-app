@@ -34,6 +34,12 @@ Rails.application.routes.draw do
 
   resources :users
 
+  get 'users/:id/admin', to: 'users#admin', as: 'admin'
+
+  post 'users/:id/admin', to: 'users#admin_invite', as: 'admin_invite'
+
+  resources :admin_status, only: [:edit], to: 'users#edit_admin_status'
+
   resources :account_activation, only: [:edit]
 
   get '/login', to: "sessions#new"

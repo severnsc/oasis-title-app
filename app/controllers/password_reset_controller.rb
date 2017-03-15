@@ -16,6 +16,7 @@ class PasswordResetController < ApplicationController
         redirect_to root_path
       else
         flash[:notice] = "Your account is not activated! Look in your email for the activation link."
+        redirect_to root_path
       end
     else
       flash.now[:danger] = "No account found with that email!"

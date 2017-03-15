@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313154803) do
+ActiveRecord::Schema.define(version: 20170315211430) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20170313154803) do
     t.boolean  "activated",         default: false
     t.datetime "activated_at"
     t.string   "activation_digest"
+    t.string   "admin_digest"
   end
 
 end

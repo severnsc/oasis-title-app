@@ -9,4 +9,9 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: @user.email, subject: "Reset your password"
   end
+
+  def admin_invite(user)
+    @user = user
+    mail to: @user.email, subject: "You have been invited to become an admin at Oasis Title Company"
+  end
 end

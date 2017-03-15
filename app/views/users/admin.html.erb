@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Welcome to your admin console <%= @user.name %></h1>
+    <h2>Invite a user to be an admin</h2>
+    <%= form_for :admin_invite, url: admin_invite_path do |f| %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.submit "Send Admin Invite", class: 'btn btn-primary' %>
+
+    <% end %>
+  </div>
+</div>

@@ -59,6 +59,9 @@
               <ul class="dropdown-menu">
                 <li><%= link_to "Profile", user_path(current_user) %></li>
                 <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+                <% if current_user.admin? %>
+                  <li><%= link_to "Admin Console", admin_path(current_user) %></li>
+                <% end %>
                 <li class="divider"></li>
                 <li>
                   <%= link_to "Logout", logout_path, method: :delete %>

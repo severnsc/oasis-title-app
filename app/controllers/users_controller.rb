@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :logged_in_user, only: [:show]
+	before_action :is_admin?, only: [:admin, :admin_invite]
 
 	def new
 		@user = User.new
@@ -38,7 +39,51 @@ class UsersController < ApplicationController
 		@users = User.all
 	end
 
+	def admin
+		@user = User.find(params[:id])
+	end
+
+	def admin_invite
+		@invitee = User.find_by_email(params[:admin_invite][:email])
+		if @invitee
+			if @invitee.activated?
+				@invitee.create_admin_invite_digest
+				@invitee.save
+				@invitee.send_admin_invite_email
+				flash[:success] = "Admin invite sent!"
+				redirect_to admin_path(current_user)
+			else
+				flash[:notice] = "That account is not activated!"
+				redirect_to admin_path(current_user)
+			end
+		else
+			flash.now[:danger] = "No user found with that email!"
+			render 'admin'
+		end
+	end
+
+	def edit_admin_status
+		user = User.find_by_email(params[:email])
+		if user && user.activated? && user.authenticated?(:admin, params[:id]) && user.update_attribute(:admin, true)
+			user.update_attribute(:admin_digest, nil)
+			log_in(user)
+			flash[:success] = "You are now an admin!"
+			redirect_to admin_path(user)
+		else
+			flash[:danger] = "Invalid link!"
+			redirect_to root_path
+		end
+	end
+
 	private
+
+	def logged_in_user
+		redirect_to login_path unless current_user
+	end
+
+	def is_admin?
+		redirect_to user_path unless current_user && current_user.admin?
+	end
 
 	def user_params
 		params.require(:user).permit(:email, :name, :password, :password_confirmation)

@@ -10,9 +10,4 @@ class BrokerageTest < ActiveSupport::TestCase
 	test "should be valid" do
 		assert @brokerage.valid?
 	end
-
-	test "should have an address" do
-		@brokerage.address  = nil
-		assert_not @brokerage.valid?
-	end
 end

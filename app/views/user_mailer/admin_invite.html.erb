@@ -1,0 +1,7 @@
+<h1>Oasis Title Company</h1>
+
+<p>Hello <%= @user.name %>,</p>
+
+<p>You have been invited to become an admin on the Oasis Title Company website. Click the link below to accept the invitation and become an admin:</p>
+
+<%= link_to "Accept Invitation", edit_admin_status_url(@user.admin_token, email: @user.email) %>
