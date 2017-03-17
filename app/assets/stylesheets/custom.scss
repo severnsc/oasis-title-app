@@ -243,4 +243,19 @@ input{
   }
 }
 
-/* Title order show */
+/* Blog post editor */
+.wysihtml5-supported textarea{
+  width:100%;
+  height:500px;
+}
+
+/* Blog index */
+#blog-index img{
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.post{
+  border-bottom: 1px solid $gray-medium-light;
+}

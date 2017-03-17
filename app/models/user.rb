@@ -10,6 +10,7 @@ class User < ApplicationRecord
     validates :password, presence: true, length: {minimum: 8}, allow_nil: true
     validates :name, presence: true
     has_many :title_orders
+    has_many :posts
 
     def User.new_token
     	SecureRandom.urlsafe_base64

@@ -11,6 +11,7 @@ gem 'rails', '~> 5.0.2'
 gem 'bootstrap-sass', '3.3.6'
 gem 'figaro'
 gem 'rails-controller-testing'
+gem 'bootsy'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets

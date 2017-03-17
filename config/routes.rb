@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  mount Bootsy::Engine => '/bootsy', as: 'bootsy'
+  namespace :blog do
+    resources :posts
+  end
 
   get '/about', to: 'static_pages#about'
 

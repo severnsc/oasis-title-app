@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315211430) do
+ActiveRecord::Schema.define(version: 20170317140039) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -31,6 +31,20 @@ ActiveRecord::Schema.define(version: 20170315211430) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.index ["brokerage_id"], name: "index_agents_on_brokerage_id"
+  end
+
+  create_table "bootsy_image_galleries", force: :cascade do |t|
+    t.string   "bootsy_resource_type"
+    t.integer  "bootsy_resource_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bootsy_images", force: :cascade do |t|
+    t.string   "image_file"
+    t.integer  "image_gallery_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "brokerages", force: :cascade do |t|
@@ -72,6 +86,15 @@ ActiveRecord::Schema.define(version: 20170315211430) do
     t.string   "email"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text     "body"
+    t.string   "title"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "title_orders", force: :cascade do |t|

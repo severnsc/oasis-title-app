@@ -1,0 +1,13 @@
+<%= form_for @post, url: blog_posts_path do |f| %>
+
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+
+  <%= f.label :body %>
+  <%= f.bootsy_area :body, class: 'form-control' %>
+
+  <%= f.submit "Create post", class: 'btn btn-primary' %>
+
+<% end %>
