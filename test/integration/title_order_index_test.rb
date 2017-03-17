@@ -1,10 +1,10 @@
 class TitleOrderIndexTest < ActionDispatch::IntegrationTest
 
   def setup
-    @admin = build(:admin)
-    @user = build(:non_admin)
-    @title_order = build(:title_order)
-    @other_title_order = build(:other_title_order)
+    @admin = create(:admin)
+    @user = create(:non_admin)
+    @title_order = create(:title_order)
+    @other_title_order = create(:other_title_order)
   end
 
   test "Non-admin should only see his own title orders" do

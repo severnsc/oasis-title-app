@@ -1,6 +1,12 @@
 FactoryGirl.define do
-  factory :admin, class: User do
-    email "admin@example.com"
+  sequence :email do |n|
+    "test#{n}@example.com"
+  end
+end
+
+FactoryGirl.define do
+  factory :admin, aliases: [:user], class: User do
+    email
     name "Chris Severns"
     password_digest {User.digest('password')}
     admin true
@@ -9,7 +15,7 @@ FactoryGirl.define do
   end
 
   factory :non_admin, class: User do
-    email "non-admin@example.com"
+    email
     name "Non-admin"
     password_digest {User.digest('password')}
     admin false

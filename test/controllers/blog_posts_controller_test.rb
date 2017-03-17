@@ -9,7 +9,7 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "getting new post page as non-admin redirects" do
-    log_in_as(@non_admin)
+    session[:user_id] = @non_admin.id
     get new_blog_post_path
     assert_redirected_to blog_posts_path
     follow_redirect!
@@ -50,12 +50,12 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@non_admin)
     title = "New Title"
     body = "New body"
-    post blog_post_path(@post), params: { post: { title: title,
+    patch blog_post_path(@post), params: { post: { title: title,
                                                   body: body}}
     assert_not_equal title, @post.reload.title
     assert_not_equal body, @post.reload.body
     log_in_as(@admin)
-    post blog_post_path(@post), params: { post: { title: title,
+    patch blog_post_path(@post), params: { post: { title: title,
                                                   body: body}}
     assert_equal title, @post.reload.title
     assert_equal body, @post.reload.body                                                  

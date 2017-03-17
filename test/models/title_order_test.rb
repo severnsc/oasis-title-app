@@ -12,6 +12,8 @@ class TitleOrderTest < ActiveSupport::TestCase
 
   test "should be valid" do
   	assert @title_order.valid?
+    @title_order.save
+    puts @title_order.errors.full_messages
   end
 
 end
