@@ -1,26 +1,31 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-	<% if params[:type] == 'orders' %>
-		<h1>All Title Orders</h1>
-	<% else %>
+	<% if params[:type] == 'quotes' %>
 		<h1>All Title Quotes</h1>
+	<% else %>
+		<h1>All Title Orders</h1>
 	<% end %>
-		<% @title_orders.each do |order| %>
-			<div class="title-order">
-				<p>Property: <%= order.property.formatted %></p>
-				<p><%= pluralize_without_count(order.buyers.count, "Buyer") %>:
-				<% if order.buyers.count == 1 %>
-					<%= order.buyers.first.full_name %></p>
-				<% else %>
-					</p>
-					<ul>
-					<% order.buyers.each do |buyer| %>
-						<li><%= buyer.full_name %></li>
+		<% if @title_orders.any? %>
+			<%= render 'search_form' %>
+			<% @title_orders.each do |order| %>
+				<div class="title-order">
+					<p>Property: <%= order.property.formatted %></p>
+					<p><%= pluralize_without_count(order.buyers.count, "Buyer") %>:
+					<% if order.buyers.count == 1 %>
+						<%= order.buyers.first.full_name %></p>
+					<% else %>
+						</p>
+						<ul>
+						<% order.buyers.each do |buyer| %>
+							<li><%= buyer.full_name %></li>
+						<% end %>
+						</ul>
 					<% end %>
-					</ul>
-				<% end %>
-				<p><%= link_to "View Title Order", title_order_path(order) %></p>
-			</div>
+					<p><%= link_to "View Title Order", title_order_path(order) %></p>
+				</div>
+			<% end %>
+		<% else %>
+			<p>You don't have any orders yet!</p>
 		<% end %>
 	</div>
 </div>

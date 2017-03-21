@@ -61,6 +61,53 @@ class TitleOrder < ApplicationRecord
 		quote = false if params['quote'] == '0'
 	end
 
+	def self.search(params, current_user)
+		if params[:type] == 'quotes'
+			if current_user.admin?
+				if params[:name_search]
+					@title_orders = joins(:buyers).where("buyers.first_name LIKE ? OR buyers.last_name LIKE ?", params[:name_search], params[:name_search])
+					@title_orders = @title_orders.where('quote = ?', true)
+				else
+					@title_orders = where('quote = ?', true)
+				end
+			else
+				if params[:name_search]
+					@title_orders = current_user.title_orders.joins(:buyers).where('buyers.first_name LIKE ? OR buyers.last_name LIKE ?', params[:name_search], params[:name_search])
+					@title_orders = @title_orders.where('quote = ?', true)
+				else
+					@title_orders = current_user.title_orders.where('quote = ?', true)
+				end
+			end
+		elsif params[:type] == 'orders'
+			if current_user.admin?
+				if params[:name_search]
+					@title_orders = joins(:buyers).where("buyers.first_name LIKE ? OR buyers.last_name LIKE ?", params[:name_search], params[:name_search])
+					@title_orders = @title_orders.where('quote = ?', false)
+				else
+					@title_orders = where('quote = ?', false)
+				end
+			else
+				if params[:name_search]
+					@title_orders = current_user.title_orders.joins(:buyers).where("buyers.first_name LIKE ? OR buyers.last_name LIKE ?", params[:name_search], params[:name_search])
+					@title_orders = @title_orders.where('quote = ?', false)
+				else
+					@title_orders = current_user.title_orders.where('quote = ?', false)
+				end
+			end
+		else
+			if params[:name_search]
+				if current_user.admin?
+					@title_orders = joins(:buyers).where('buyers.first_name LIKE ? OR buyers.last_name LIKE ?', params[:name_search], params[:name_search])
+					@title_orders = @title_orders.where('quote = ?', false)
+				else
+					@title_orders = current_user.title_orders.joins(:buyers).where('buyers.first_name LIKE ? OR buyers.last_name LIKE ?', params[:name_search], params[:name_search])
+				end
+			else
+				current_user.admin? ? @title_orders = where('quote = ?', false) : @title_orders = current_user.title_orders.where('quote = ?', false)
+			end
+		end
+	end
+
 	def lender_attributes=(attributes)
 		self.lender = Lender.where(attributes).first_or_create
 	end
