@@ -11,6 +11,7 @@ class User < ApplicationRecord
     validates :name, presence: true
     has_many :title_orders
     has_many :posts
+    has_many :searches
 
     def User.new_token
     	SecureRandom.urlsafe_base64

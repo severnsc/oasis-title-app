@@ -1,15 +1,6 @@
 <%= form_tag(title_orders_path, method: :get) %>
 <p>Search by name:</p>
 <%= text_field_tag :name_search, params[:name_search], {class: 'form-control'} %>
-<!-- <p>Search by address:</p>
-<%= label_tag 'Street' %>
-<%= text_field_tag :street_search, params[:street_search], class: 'form-control' %>
-<%= label_tag 'City' %>
-<%= text_field_tag :city_search, params[:city_search], class: 'form-control' %>
-<%= label_tag 'State' %>
-<%= text_field_tag :state_search, params[:state_search], class: 'form-control' %>
-<%= label_tag 'Zip' %>
-<%= text_field_tag :zip_search, params[:zip_search], class: 'form-control' %>
--->
 <%= hidden_field_tag :type, params[:type] %>
 <%= submit_tag "Search", class: 'btn btn-primary', name: nil %>
+<%= link_to "Advanced Search", new_search_path %>

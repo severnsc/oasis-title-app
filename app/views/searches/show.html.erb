@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Search Results</h1>
+    <%= form_for @search do |f| %>
+
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :search_name %>
+      <%= f.text_field :search_name, class: 'form-control' %>
+
+      <%= f.submit "Save Search", class: 'btn btn-primary' %>
+
+    <% end %>
+    
+    <% if @title_orders.any? %>
+      <% @title_orders.each do |order| %>
+        <div class="title-order">
+          <p>Property: <%= order.property.formatted %></p>
+          <p><%= pluralize_without_count(order.buyers.count, "Buyer") %>:
+          <% if order.buyers.count == 1 %>
+            <%= order.buyers.first.full_name %></p>
+          <% else %>
+            </p>
+            <ul>
+            <% order.buyers.each do |buyer| %>
+              <li><%= buyer.full_name %></li>
+            <% end %>
+            </ul>
+          <% end %>
+          <p><%= link_to "View Title Order", title_order_path(order) %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No results for that search!</p>
+    <% end %>
+  </div>
+</div>

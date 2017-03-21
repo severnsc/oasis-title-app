@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :searches, only: [:new, :create, :show, :update]
+
   get 'users/:id/admin', to: 'users#admin', as: 'admin'
 
   post 'users/:id/admin', to: 'users#admin_invite', as: 'admin_invite'
