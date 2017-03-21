@@ -1,6 +1,10 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-	<h1>All Title Orders</h1>
+	<% if params[:type] == 'orders' %>
+		<h1>All Title Orders</h1>
+	<% else %>
+		<h1>All Title Quotes</h1>
+	<% end %>
 		<% @title_orders.each do |order| %>
 			<div class="title-order">
 				<p>Property: <%= order.property.formatted %></p>

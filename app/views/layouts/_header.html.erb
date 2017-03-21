@@ -51,7 +51,8 @@
             <% if current_user.admin? %>
               <li><%= link_to "Users", users_path %></li>
             <% end %>
-            <li><%= link_to "Title Orders", title_orders_path %></li>
+            <li><%= link_to "Title Orders", title_orders_path(type: 'orders') %></li>
+            <li><%= link_to "Quotes", title_orders_path(type: 'quotes') %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>

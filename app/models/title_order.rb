@@ -58,6 +58,7 @@ class TitleOrder < ApplicationRecord
 		build_buyers_agent(params['buyers_agent_attributes'])
 		build_sellers_agent(params['sellers_agent_attributes'])
 		marry_buyers if params['married'] == '1'
+		quote = false if params['quote'] == '0'
 	end
 
 	def lender_attributes=(attributes)

@@ -51,7 +51,22 @@ class TitleOrdersController < ApplicationController
 	end
 
 	def index
-		current_user.admin? ? @title_orders = TitleOrder.all : @title_orders = current_user.title_orders
+		#if admin get all title orders, if not get only your title orders
+		if params[:type] == 'quotes'
+			if current_user.admin?
+				@title_orders = TitleOrder.where('quote = ?', true)
+			else
+				@title_orders = current_user.title_orders.where('quote = ?', true)
+			end
+		elsif params[:type] == 'orders'
+			if current_user.admin?
+				@title_orders = TitleOrder.where('quote = ?', false)
+			else
+				@title_orders = current_user.title_orders.where('quote = ?', false)
+			end
+		else
+			current_user.admin? ? @title_orders = TitleOrder.where('quote = ?', false) : @title_orders = current_user.title_orders.where('quote = ?', false)
+		end
 	end
 
 	def destroy
