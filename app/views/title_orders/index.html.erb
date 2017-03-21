@@ -25,7 +25,12 @@
 				</div>
 			<% end %>
 		<% else %>
-			<p>You don't have any orders yet!</p>
+			<% if params[:name_search] %>
+				<p class="alert alert-danger">No title orders found for that search!</p>
+				<%= render 'search_form' %>
+			<% else %>
+				<p>You don't have any orders yet!</p>
+			<% end %>
 		<% end %>
 	</div>
 </div>
