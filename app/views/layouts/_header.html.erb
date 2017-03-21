@@ -51,8 +51,20 @@
             <% if current_user.admin? %>
               <li><%= link_to "Users", users_path %></li>
             <% end %>
-            <li><%= link_to "Title Orders", title_orders_path(type: 'orders') %></li>
-            <li><%= link_to "Quotes", title_orders_path(type: 'quotes') %></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Title Orders <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Order a Title", number_of_buyers_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to "Request a Quote", request_quote_path %></li>
+                <li class="divider"></li>
+                <li><%= link_to "Title Orders", title_orders_path(type: 'orders') %></li>
+                <li class="divider"></li>
+                <li><%= link_to "Quotes", title_orders_path(type: 'quotes') %></li>
+              </ul>
+            </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>
