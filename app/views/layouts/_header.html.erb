@@ -46,7 +46,7 @@
               <li><%= link_to "Title FAQ", title_faq_path %></li>
             </ul>
           </li>
-          <li><%= link_to "Blog", '#' %></li>
+          <li><%= link_to "Blog", blog_posts_path %></li>
           <% if logged_in? %>
             <% if current_user.admin? %>
               <li><%= link_to "Users", users_path %></li>
