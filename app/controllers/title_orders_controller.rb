@@ -63,7 +63,10 @@ class TitleOrdersController < ApplicationController
 	private
 
 	def logged_in
-		redirect_to root_path unless logged_in?
+		unless current_user
+			store_location
+			redirect_to login_path
+		end
 	end
 
 	def correct_user

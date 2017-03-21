@@ -49,6 +49,9 @@ class StaticPagesController < ApplicationController
   private
 
   def logged_in
-    redirect_to login_path unless current_user
+    unless current_user
+      store_location
+      redirect_to login_path
+    end
   end
 end

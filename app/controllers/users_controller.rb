@@ -79,7 +79,10 @@ class UsersController < ApplicationController
 	private
 
 	def logged_in_user
-		redirect_to login_path unless current_user
+		unless current_user
+			store_location
+			redirect_to login_path
+		end
 	end
 
 	def is_admin?
