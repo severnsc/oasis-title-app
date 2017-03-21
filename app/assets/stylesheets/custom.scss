@@ -17,6 +17,10 @@ $gray-medium-light: #eaeaea;
   display:inline;
 }
 
+.checkbox input[type='checkbox']{
+  margin-left: 0px;
+}
+
 body {
   padding-top: 60px;
 }
