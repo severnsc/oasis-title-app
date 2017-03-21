@@ -1,17 +1,19 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <h1>Search Results</h1>
-    <%= form_for @search do |f| %>
+    <div class="search" id="edit">
+      <%= form_for @search do |f| %>
 
-      <%= render 'shared/error_messages', object: f.object %>
+        <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :search_name %>
-      <%= f.text_field :search_name, class: 'form-control' %>
+        <%= f.label :search_name %>
+        <%= f.text_field :search_name, class: 'form-control' %>
 
-      <%= f.submit "Save Search", class: 'btn btn-primary' %>
+        <%= f.submit "Save Search", class: 'btn btn-primary' %>
 
-    <% end %>
-    
+      <% end %>
+    </div>
+
     <% if @title_orders.any? %>
       <% @title_orders.each do |order| %>
         <div class="title-order">

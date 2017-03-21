@@ -24,7 +24,9 @@
     <% if @user.searches.any? %>
       <h2><%= @user.name %>'s Saved Searches</h2>
       <% @user.searches.each do |search| %>
-        <p><%= link_to search.search_name, search_path(search) %></p>
+        <% unless search.search_name.blank? %>
+          <p><%= link_to search.search_name, search_path(search) %></p>
+        <% end %>
       <% end %>
     <% end %>
 	</div>

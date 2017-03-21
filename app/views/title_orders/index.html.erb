@@ -6,7 +6,9 @@
 		<h1>All Title Orders</h1>
 	<% end %>
 		<% if @title_orders.any? %>
-			<%= render 'search_form' %>
+			<div class="search">
+				<%= render 'search_form' %>
+			</div>
 			<% @title_orders.each do |order| %>
 				<div class="title-order">
 					<p>Property: <%= order.property.formatted %></p>

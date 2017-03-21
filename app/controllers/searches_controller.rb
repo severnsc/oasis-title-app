@@ -39,7 +39,7 @@ class SearchesController < ApplicationController
   private
 
   def search_params
-    params.require(:search).permit(:search_name, :buyer_name, :street, :city, :state, :zip)
+    params.require(:search).permit(:search_name, :buyer_name, :street, :city, :state, :zip, :order_type)
   end
 
   def logged_in
