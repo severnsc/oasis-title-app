@@ -1,7 +1,13 @@
 require 'test_helper'
 
 class PostTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  
+  def setup
+    @user = create(:non_admin)
+    @post = Post.new(title: "Title", body: "Body", status: "published", user: @user)
+  end
+
+  test "should be valid" do
+    assert @post.valid?
+  end
 end

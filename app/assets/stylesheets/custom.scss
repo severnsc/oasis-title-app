@@ -266,6 +266,13 @@ input{
 
 .post{
   border-bottom: 1px solid $gray-medium-light;
+  p{
+    text-align: center;
+  }
+  img{
+    display: block;
+    margin: auto;
+  }
 }
 
 /* Title order index */

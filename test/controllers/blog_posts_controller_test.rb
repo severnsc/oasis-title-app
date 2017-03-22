@@ -29,12 +29,14 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@non_admin)
     assert_no_difference 'Post.count' do
       post blog_posts_path, params: { post: { title: "Post",
-                                              body: "body"}}
+                                              body: "body",
+                                              status: "published"}}
     end
     log_in_as(@admin)
     assert_difference 'Post.count' do
       post blog_posts_path, params: { post: { title: "Post",
-                                              body: "body"}}
+                                              body: "body",
+                                              status: "published"}}
     end
     post = assigns(:post)
     assert_not flash.empty?
