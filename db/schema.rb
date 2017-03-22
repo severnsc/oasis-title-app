@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322181432) do
+ActiveRecord::Schema.define(version: 20170322193425) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "street"
@@ -138,16 +138,17 @@ ActiveRecord::Schema.define(version: 20170322181432) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "remember_digest"
-    t.boolean  "admin",             default: false
+    t.boolean  "admin",               default: false
     t.string   "reset_digest"
     t.datetime "reset_sent_at"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "name"
-    t.boolean  "activated",         default: false
+    t.boolean  "activated",           default: false
     t.datetime "activated_at"
     t.string   "activation_digest"
     t.string   "admin_digest"
+    t.boolean  "title_administrator", default: false
   end
 
 end
