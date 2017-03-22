@@ -17,9 +17,10 @@ class TitleOrdersController < ApplicationController
 		@title_order.check_params(title_order_params)
 		@title_order.user = current_user
 		if @title_order.save
+			@title_order.mail_title_order_admins
 			current_user.title_orders << @title_order
 			current_user.save
-			flash[:success] = "title order created"
+			flash[:success] = "Title order created"
 			session.delete(:number_of_buyers)
 			redirect_to title_order_path(@title_order)
 		else

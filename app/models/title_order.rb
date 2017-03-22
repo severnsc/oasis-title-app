@@ -42,6 +42,13 @@ class TitleOrder < ApplicationRecord
 		errors.add(:base, "Sellers agent must have license number") if sellers_agent.license_number.blank?
 	end
 
+	def mail_title_order_admins
+		@admins = User.where('title_administrator = ?', true)
+		@admins.each do |admin|
+			admin.send_title_alert_email(self)
+		end
+	end
+
 	def check_params(params)
 		buyer_title_orders.each_with_index do |bto, i| 
 			bto.build_buyer(params['buyer_title_orders_attributes']["#{i}"]['buyer_attributes'])
