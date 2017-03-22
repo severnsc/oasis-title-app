@@ -40,6 +40,19 @@ class UsersController < ApplicationController
 		@users = User.all
 	end
 
+	def destroy
+		@user = User.find(params[:id])
+		if @user == current_user
+			log_out
+			@user.delete
+			redirect_to root_path
+		else
+			@user.delete
+			flash[:success] = "User deleted!"
+			redirect_to current_user
+		end
+	end
+
 	def admin
 		@user = User.find(params[:id])
 	end
