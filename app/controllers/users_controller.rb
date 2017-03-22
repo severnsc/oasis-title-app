@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-	before_action :logged_in_user, only: [:show, :admin, :admin_invite]
+	before_action :logged_in_user, only: [:show, :admin, :admin_invite, :destroy]
 	before_action :is_admin?, only: [:admin, :admin_invite]
 	before_action :correct_user, only: [:edit, :update, :admin, :admin_invite]
+	before_action :correct_or_admin, only: [:destroy]
 
 	def new
 		@user = User.new
@@ -105,6 +106,11 @@ class UsersController < ApplicationController
 	def correct_user
 		user = User.find(params[:id])
 		redirect_to current_user unless user == current_user
+	end
+
+	def correct_or_admin
+		user = User.find(params[:id])
+		redirect_to current_user unless current_user.admin? || user == current_user
 	end
 
 	def user_params
