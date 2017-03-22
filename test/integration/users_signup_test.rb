@@ -39,5 +39,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 		assert_not user.activated?
 		get edit_account_activation_path(user.activation_token, email: user.email)
 		assert user.reload.activated?
+		assert_redirected_to user_path(user)
+		assert_not flash.empty?
+		follow_redirect!
+		assert_template 'users/show'
 	end
 end
