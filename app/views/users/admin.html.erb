@@ -1,15 +1,17 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <h1>Welcome to your admin console <%= @user.name %></h1>
-    <h2>Invite a user to be an admin</h2>
-    <%= form_for :admin_invite, url: admin_invite_path do |f| %>
+    <div class="invite">
+      <h2>Invite a user to be an admin</h2>
+      <%= form_for :admin_invite, url: admin_invite_path do |f| %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
 
-      <%= f.submit "Send Admin Invite", class: 'btn btn-primary' %>
+        <%= f.submit "Send Admin Invite", class: 'btn btn-primary' %>
 
-    <% end %>
+      <% end %>
+    </div>
     <h2><%= link_to "Write a new Blog Post", new_blog_post_path %></h2>
     <% if @user.posts.any? %>
       <% if @user.posts.where("status = ?", "published").any? %>
@@ -25,9 +27,10 @@
         <% end %>
       <% end %>
       <% if @user.posts.where("status = ?", "draft").any? %>
+        <h2>Your Draft Posts</h2>
         <% @user.posts.where("status = ?", "draft").each do |post| %>
           <div class="post">
-            <h2><%= link_to post.title, blog_post_path(post) %></h2>
+            <h2><%= link_to post.title, edit_blog_post_path(post) %></h2>
             <% if post.bootsy_image_gallery.images.any? %>
               <%= image_tag post.bootsy_image_gallery.images.first.image_file %>
             <% end %>

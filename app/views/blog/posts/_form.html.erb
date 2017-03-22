@@ -1,4 +1,4 @@
-<%= form_for @post, url: blog_posts_path do |f| %>
+<%= form_for @post, url: yield(:url) do |f| %>
 
   <%= render 'shared/error_messages', object: f.object %>
 
@@ -9,7 +9,7 @@
   <%= f.bootsy_area :body, class: 'form-control' %>
 
   <%= f.label :status, "Save as draft?" %>
-  <%= f.check_box :status %>
+  <%= f.check_box :status, {}, 'draft', 'published' %>
 
   <%= f.submit "Create post", class: 'btn btn-primary' %>
 
