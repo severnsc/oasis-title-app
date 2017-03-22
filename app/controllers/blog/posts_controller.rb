@@ -8,6 +8,7 @@ class Blog::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
+    @post.status == '1' ? @post.status = 'draft' : @post.status = 'published'
     if @post.save
       flash[:success] = "Post created!"
       redirect_to blog_post_path(@post)
@@ -21,7 +22,7 @@ class Blog::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.where('status = ?', "published")
   end
 
   def edit
@@ -52,6 +53,6 @@ class Blog::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:body, :title, :bootsy_image_gallery_id)
+    params.require(:post).permit(:body, :title, :bootsy_image_gallery_id, :status)
   end
 end

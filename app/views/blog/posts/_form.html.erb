@@ -8,6 +8,9 @@
   <%= f.label :body %>
   <%= f.bootsy_area :body, class: 'form-control' %>
 
+  <%= f.label :status, "Save as draft?" %>
+  <%= f.check_box :status %>
+
   <%= f.submit "Create post", class: 'btn btn-primary' %>
 
 <% end %>
