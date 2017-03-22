@@ -4,7 +4,6 @@ FactoryGirl.define do
     last_name "Severns"
     phone_number "8888888888"
     email 'user@example.com'
-    property
     mailing_address
   end
 end

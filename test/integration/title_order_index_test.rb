@@ -1,3 +1,5 @@
+require 'test_helper'
+
 class TitleOrderIndexTest < ActionDispatch::IntegrationTest
 
   def setup
@@ -7,8 +9,13 @@ class TitleOrderIndexTest < ActionDispatch::IntegrationTest
     @other_title_order = create(:other_title_order)
   end
 
+  test "user should be valid" do
+    assert @user.valid?, @user.errors.full_messages.inspect
+  end
+
   test "Non-admin should only see his own title orders" do
     log_in_as(@user)
+    @user.title_orders << @other_title_order
     get title_orders_path
     assert_template 'title_orders/index'
     assert_select 'div.title-order', count: 1

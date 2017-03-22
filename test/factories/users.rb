@@ -14,7 +14,7 @@ FactoryGirl.define do
     activated_at {Time.zone.now}
   end
 
-  factory :non_admin, class: User do
+  factory :non_admin, aliases: [:user2], class: User do
     email
     name "Non-admin"
     password_digest {User.digest('password')}

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :title_order do
     property
-    buyer
+    buyers {build_list :buyer, 1}
     buyers_agent
     sellers_agent
     lender
@@ -12,12 +12,12 @@ FactoryGirl.define do
     survey_requested true
     notes 'This is a note'
     quote false
-    admin
+    user
   end
 
   factory :other_title_order, class: TitleOrder do
-    property
-    buyer
+    association :property, factory: :address
+    buyers {build_list :buyer, 1}
     buyers_agent
     sellers_agent
     lender
@@ -28,6 +28,6 @@ FactoryGirl.define do
     survey_requested true
     notes 'This is a note'
     quote false
-    non_admin
+    association :user, factory: :non_admin
   end
 end

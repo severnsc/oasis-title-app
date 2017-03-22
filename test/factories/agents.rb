@@ -4,6 +4,7 @@ FactoryGirl.define do
     last_name "Weisberg"
     phone_number '5615412225'
     email 'larry@example.com'
+    license_number "BK123456"
     brokerage
   end
 end

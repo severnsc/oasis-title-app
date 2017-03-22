@@ -1,15 +1,21 @@
 require 'test_helper'
+require 'database_cleaner'
 
 class BlogPostsControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @admin = create(:admin)
     @non_admin = create(:non_admin)
+    @gallery = create(:gallery)
     @post = create(:post)
   end
 
+  teardown do
+    DatabaseCleaner.strategy = :truncation
+  end
+
   test "getting new post page as non-admin redirects" do
-    session[:user_id] = @non_admin.id
+    log_in_as(@non_admin)
     get new_blog_post_path
     assert_redirected_to blog_posts_path
     follow_redirect!
@@ -66,8 +72,9 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Post.count' do
       delete blog_post_path(@post)
     end
+    logout
     log_in_as(@admin)
-    assert_difference 'Post.count' do
+    assert_difference 'Post.count', -1 do
       delete blog_post_path(@post)
     end
     assert_not flash.empty?

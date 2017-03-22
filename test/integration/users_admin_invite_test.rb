@@ -1,4 +1,6 @@
-class TitleOrderIndexTest < ActionDispatch::IntegrationTest
+require 'test_helper'
+
+class UserAdminInviteTest < ActionDispatch::IntegrationTest
 
   def setup
     @admin = create(:admin)
