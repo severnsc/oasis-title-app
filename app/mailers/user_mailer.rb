@@ -26,4 +26,10 @@ class UserMailer < ApplicationMailer
     @title_order = title_order
     mail to: @user.email, subject: "New title order submitted!"
   end
+
+  def admin_accept(user, admin)
+    @user = user
+    @admin = admin
+    mail to: @user.email, subject: "New admin added!"
+  end
 end

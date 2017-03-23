@@ -28,6 +28,7 @@ class UserAdminInviteTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     assert_not @invitee.admin?
     get edit_admin_status_path(@invitee.admin_token, email: @invitee.email)
+    assert_equal 4, ActionMailer::Base.deliveries.size
     assert @invitee.reload.admin?
     assert_not flash.empty?
     assert_redirected_to admin_path(@invitee)

@@ -85,6 +85,8 @@ class UsersController < ApplicationController
 			user.update_attribute(:admin_digest, nil)
 			log_in(user)
 			flash[:success] = "You are now an admin!"
+			@admins = User.where('admin = ?', true)
+			@admins.each {|admin| admin.send_admin_accept_email(user)}
 			redirect_to admin_path(user)
 		else
 			flash[:danger] = "Invalid link!"

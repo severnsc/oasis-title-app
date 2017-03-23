@@ -33,6 +33,10 @@ class User < ApplicationRecord
         UserMailer.admin_alert(self, invitee).deliver_now
     end
 
+    def send_admin_accept_email(admin)
+        UserMailer.admin_accept(self, admin).deliver_now
+    end
+
     def send_title_alert_email(title_order)
         UserMailer.title_alert(self, title_order).deliver_now
     end

@@ -44,7 +44,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get admin_path(@admin)
     assert_template 'users/admin'
     post admin_invite_path, params: {admin_invite: { email: @user.email}}
-    assert_equal 1, ActionMailer::Base.deliveries.size
+    assert_equal 3, ActionMailer::Base.deliveries.size
     assert_redirected_to admin_path(@admin)
     assert_not flash.empty?
   end
