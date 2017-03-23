@@ -29,6 +29,10 @@ class User < ApplicationRecord
     	BCrypt::Password.new(digest).is_password?(token)
     end
 
+    def send_admin_alert_email(invitee)
+        UserMailer.admin_alert(self, invitee).deliver_now
+    end
+
     def send_title_alert_email(title_order)
         UserMailer.title_alert(self, title_order).deliver_now
     end

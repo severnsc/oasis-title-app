@@ -17,7 +17,7 @@ class UserAdminInviteTest < ActionDispatch::IntegrationTest
     @invitee.admin_digest = User.digest('token')
     @invitee.save
     assert_not flash.empty?
-    assert_equal 1, ActionMailer::Base.deliveries.size
+    assert_equal 2, ActionMailer::Base.deliveries.size
     assert_redirected_to admin_path(@admin)
     get edit_admin_status_path("invalid token", email: @invitee.email)
     assert_not flash.empty?

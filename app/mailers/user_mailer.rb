@@ -15,6 +15,12 @@ class UserMailer < ApplicationMailer
     mail to: @user.email, subject: "You have been invited to become an admin at Oasis Title Company"
   end
 
+  def admin_alert(user, invitee)
+    @user = user
+    @invitee = invitee
+    mail to: @user.email, subject: "A new admin invite has been sent out"
+  end
+
   def title_alert(user, title_order)
     @user = user
     @title_order = title_order

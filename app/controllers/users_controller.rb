@@ -65,6 +65,8 @@ class UsersController < ApplicationController
 				@invitee.create_admin_invite_digest
 				@invitee.save
 				@invitee.send_admin_invite_email
+				@admins = User.where('admin = ?', true)
+				@admins.each {|admin| admin.send_admin_alert_email(@invitee)}
 				flash[:success] = "Admin invite sent!"
 				redirect_to admin_path(current_user)
 			else
